@@ -16,7 +16,7 @@ function NavBar() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="login">Login</Nav.Link>
             <Nav.Link as={Link} to="register">Register</Nav.Link>
-            <Form.Control type="text" placeholder="Search" className="mr-sm-2"/>
+            <Form.Control type="text" placeholder="Search"/>
           </Nav>
         </Navbar.Collapse>
       </Container>
