@@ -1,16 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Container, FloatingLabel } from 'react-bootstrap';
+import { doGraphQLFetch } from '../graphql/fetch';
+import { login } from '../graphql/queries';
+import { Credentials } from '../types/Credentials';
+import { LoginMessageResponse } from '../types/LoginMessageResponse';
+import { UserContext } from '../UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const apiURL = import.meta.env.VITE_API_URL;
+  
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle login logic here
-    console.log('Email:', email);
+    console.log('Email:', username);
     console.log('Password:', password);
-  };
+
+    const credentials: Credentials = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const loginData = (await doGraphQLFetch(apiURL, login, {credentials})) as LoginMessageResponse;
+      console.log(loginData);
+      localStorage.setItem('token', loginData.login.token!);
+      localStorage.setItem('user', JSON.stringify(loginData.login.user));
+      setUser(loginData.login.user);
+      navigate('/');
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <Container className="w-50">
@@ -22,7 +48,7 @@ const Login = () => {
             label="Email address"
             className="mb-3"
           >
-            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Form.Control type="email" placeholder="Enter email" value={username} onChange={(e) => setUsername(e.target.value)} />
           </FloatingLabel>
         </Form.Group>
 
