@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Form, Button, Container, FloatingLabel } from 'react-bootstrap';
 import { doGraphQLFetch } from '../graphql/fetch';
 import { login } from '../graphql/queries';
-import { Credentials } from '../types/Credentials';
+import { LoginCredentials } from '../types/LoginCredentials';
 import { LoginMessageResponse } from '../types/LoginMessageResponse';
 import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -21,13 +21,13 @@ const Login = () => {
     console.log('Email:', username);
     console.log('Password:', password);
 
-    const credentials: Credentials = {
+    const loginCredentials: LoginCredentials = {
       username: username,
       password: password,
     };
 
     try {
-      const loginData = (await doGraphQLFetch(apiURL, login, {credentials})) as LoginMessageResponse;
+      const loginData = (await doGraphQLFetch(apiURL, login, {credentials: loginCredentials})) as LoginMessageResponse;
       console.log(loginData);
       localStorage.setItem('token', loginData.login.token!);
       localStorage.setItem('user', JSON.stringify(loginData.login.user));

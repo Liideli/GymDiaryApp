@@ -1,17 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Container, FloatingLabel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
+import { doGraphQLFetch } from '../graphql/fetch';
+import { register } from '../graphql/queries';
+import { RegisterMessageResponse } from '../types/RegisterMessageResponse';
+import { RegisterCredentials } from '../types/RegisterCredentials';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const apiURL = import.meta.env.VITE_API_URL;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle registration logic here
     console.log('Username:', username);
     console.log('Email:', email);
     console.log('Password:', password);
+
+    const registerCredentials: RegisterCredentials = {
+      email: email,
+      user_name: username,
+      password: password,
+    };
+
+    try {
+      const registerData = await doGraphQLFetch(apiURL, register, { user: registerCredentials }) as RegisterMessageResponse;
+      
+      if (!registerData || !registerData.register) {
+        throw new Error('Registration failed');
+      }
+
+      console.log(registerData);
+      setUser(registerData.register.user);
+      navigate('/login');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

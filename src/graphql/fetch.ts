@@ -22,6 +22,12 @@ const doGraphQLFetch = async (
   });
   if (!response.ok) throw new Error(response.statusText);
   const json = await response.json();
+
+  // Check for GraphQL errors
+  if (json.errors) {
+    throw new Error(json.errors.map((error: { message: string }) => error.message).join(', '));
+  }
+
   return json.data;
 };
 
