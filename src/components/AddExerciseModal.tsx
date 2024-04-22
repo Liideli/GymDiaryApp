@@ -1,34 +1,20 @@
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { AddWorkoutModalProps } from '../types/Workout';
-import { WorkoutMessegeResponse } from '../types/WorkoutMessegeResponse';
-import { doGraphQLFetch } from '../graphql/fetch';
-import { createWorkout } from '../graphql/queries';
 
-const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
+const AddExerciseModal: React.FC = () => {
   const [show, setShow] = useState(false);
   const [workoutName, setWorkoutName] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const apiURL = import.meta.env.VITE_API_URL;
-  const token = localStorage.getItem('token')!;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleAddWorkout = async () => {
+  const handleAddWorkout = () => {
     // Handle adding workout logic here
     console.log('Workout Name:', workoutName);
     console.log('Description:', description);
     console.log('Date:', date);
-
-    try {
-      const workoutData = await doGraphQLFetch(apiURL, createWorkout, { input: { title: workoutName, description: description, date: date }}, token ) as WorkoutMessegeResponse;
-      console.log(workoutData);
-
-    } catch (error) {
-      console.error(error);
-    }
 
     // Close the modal after adding workout
     setShow(false);
@@ -37,28 +23,33 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Add Workout
+        Add Exercise
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Workout</Modal.Title>
+          <Modal.Title>Add Exercise</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group controlId="formWorkoutName">
-              <Form.Label>Workout Name</Form.Label>
+              <Form.Label>Exercise Name:</Form.Label>
               <Form.Control type="text" placeholder="Enter workout name" value={workoutName} onChange={(e) => setWorkoutName(e.target.value)} />
             </Form.Group>
 
-            <Form.Group controlId="formDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Enter description (optional)" value={description} onChange={(e) => setDescription(e.target.value)} />
+            <Form.Group controlId="formWeight">
+              <Form.Label>Weight:</Form.Label>
+              <Form.Control type="text" placeholder='Enter weight' />
             </Form.Group>
 
-            <Form.Group controlId="formDate">
-              <Form.Label>Date</Form.Label>
-              <Form.Control type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <Form.Group controlId="formSets">
+              <Form.Label>Sets:</Form.Label>
+              <Form.Control type="text" placeholder='Enter sets' />
+            </Form.Group>
+
+            <Form.Group controlId="formReps">
+              <Form.Label>Reps:</Form.Label>
+              <Form.Control type="text" placeholder='Enter reps' />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -75,4 +66,4 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
   );
 };
 
-export default AddWorkoutModal;
+export default AddExerciseModal;

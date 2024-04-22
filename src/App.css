@@ -3,11 +3,11 @@
   padding-right: 4rem;
   margin: 0 auto;
   text-align: center;
-  background-color: #3a3a3a;
+  background-color: #6a6a6a;
 }
 
 html {
-  background-color: #3a3a3a;
+  background-color: #6a6a6a;
 }
 
 .oswald-semibold {
@@ -46,7 +46,7 @@ html {
   align-items: center;
   justify-content: center;
   height: 10vh;
-  background-color: #3a3a3a;
+  background-color: #6a6a6a;
 }
 
 .card-list {

@@ -23,4 +23,25 @@ mutation Register($user: UserInput!) {
   }
 }`;
 
-export { login, register };
+const createWorkout = `
+mutation CreateWorkout($input: WorkoutInput!) {
+  createWorkout(input: $input) {
+    message
+    workout {
+      date
+      description
+      title
+    }
+  }
+}`;
+
+const getWorkoutsByOwner = `query WorkoutsByOwner($owner: ID!) {
+  workoutsByOwner(owner: $owner) {
+    description
+    date
+    title
+    id
+  }
+}`;
+
+export { login, register, createWorkout, getWorkoutsByOwner };
