@@ -1,3 +1,4 @@
+const API_KEY = import.meta.env.VITE_API_KEY;
 const doGraphQLFetch = async (
   url: string,
   query: string,
@@ -6,6 +7,7 @@ const doGraphQLFetch = async (
 ) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
+    'x-api-key': API_KEY,
   };
   
   if (token) {
