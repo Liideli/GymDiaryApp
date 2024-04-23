@@ -10,6 +10,8 @@ const Exercise = () => {
   const [showModal, setShowModal] = useState(false);
   const [exercises, setExercises] = useState<ExerciseType[]>([]);
   const apiURL = import.meta.env.VITE_API_URL;
+  const owner = localStorage.getItem("user")!;
+  const ownerId = owner ? JSON.parse(owner).id : null;
   const contextWorkoutId = useContext(WorkoutContext);
   const savedWorkoutId = JSON.parse(window.localStorage.getItem("workoutId")!);
 
@@ -22,7 +24,9 @@ const Exercise = () => {
       });
       setExercises(data.exercisesByWorkout);
     };
-    fetchExercises();
+    if (workoutId && ownerId) {
+      fetchExercises();
+    }
   }, []);
 
   return (
@@ -31,7 +35,8 @@ const Exercise = () => {
         <AddExerciseModal show={showModal} onHide={() => setShowModal(false)} />
       </div>
       <div className="card-list">
-        {exercises.map((exercise) => (
+      {ownerId ? (
+        exercises.map((exercise) => (
           <Card key={exercise.id} style={{ width: "20%", margin: "10px" }}>
             <Card.Body>
               <Card.Title>{exercise.name}</Card.Title>
@@ -46,7 +51,12 @@ const Exercise = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-        ))}
+        ))
+      ) : (
+        <div className="mx-auto">
+        <h2>Please login or register to mark down exercises.</h2>
+        </div>
+      )}
       </div>
     </div>
   );

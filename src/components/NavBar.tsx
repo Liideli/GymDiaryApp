@@ -29,7 +29,7 @@ function NavBar() {
                 <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
             ) : (
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link onClick={handleLogout} as={Link} to="/login">Logout</Nav.Link>
             )}
             <Form.Control type="text" placeholder="Search"/>
           </Nav>
