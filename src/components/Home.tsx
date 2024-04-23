@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { getWorkoutsByOwner } from "../graphql/queries";
 import { Workout } from "../types/Workout";
+import { WorkoutContext } from "../WorkoutContext";
+import React from "react";
 
 const Home = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -13,13 +15,13 @@ const Home = () => {
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
   const ownerId = owner ? JSON.parse(owner).id : null;
+  const { setWorkoutId } = React.useContext(WorkoutContext);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
         owner: ownerId,
       });
-      console.log("workouts", data);
       setWorkouts(data.workoutsByOwner);
     };
     if (ownerId) {
@@ -42,7 +44,11 @@ const Home = () => {
           <Card
             key={workout.id}
             style={{ width: "20%", margin: "10px" }}
-            onClick={() => navigate(`/exercise/${workout.id}`)}
+            onClick={() => {
+              setWorkoutId(workout.id);
+              localStorage.setItem("workoutId", JSON.stringify(workout.id));
+              navigate(`/exercise/${workout.id}`)
+            }}
           >
             <Card.Body>
               <Card.Title>{workout.title}</Card.Title>

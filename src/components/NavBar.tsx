@@ -10,6 +10,11 @@ import { UserContext } from '../UserContext';
 function NavBar() {
   const { user, logout } = useContext(UserContext);
 
+  const handleLogout = () => {
+    logout();
+    window.localStorage.removeItem('workoutId');
+  };
+
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
@@ -24,7 +29,7 @@ function NavBar() {
                 <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
             ) : (
-              <Nav.Link onClick={logout}>Logout</Nav.Link> // add this line
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             )}
             <Form.Control type="text" placeholder="Search"/>
           </Nav>

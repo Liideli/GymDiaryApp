@@ -9,9 +9,12 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import { useEffect, useState } from 'react';
 import { User } from './types/User';
+import { WorkoutContext } from './WorkoutContext';
+
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
+  const [workoutId, setWorkoutId] = useState<string | null>(null);
 
   // Load user data from localStorage when the app loads
   useEffect(() => {
@@ -29,6 +32,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser, logout }}>
+      <WorkoutContext.Provider value={{ workoutId, setWorkoutId }}>
       <Router>
         <NavBar />
         <Routes>
@@ -38,6 +42,7 @@ function App() {
           <Route path="/exercise/:id" element={<Exercise />} />
         </Routes>
       </Router>
+      </WorkoutContext.Provider>
     </UserContext.Provider>
   );
 }

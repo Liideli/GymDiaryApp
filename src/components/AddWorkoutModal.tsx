@@ -17,11 +17,6 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
   const handleShow = () => setShow(true);
 
   const handleAddWorkout = async () => {
-    // Handle adding workout logic here
-    console.log('Workout Name:', workoutName);
-    console.log('Description:', description);
-    console.log('Date:', date);
-
     try {
       const workoutData = await doGraphQLFetch(apiURL, createWorkout, { input: { title: workoutName, description: description, date: date }}, token ) as WorkoutMessegeResponse;
       console.log(workoutData);
@@ -29,7 +24,6 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
     } catch (error) {
       console.error(error);
     }
-
     // Close the modal after adding workout
     setShow(false);
   };
