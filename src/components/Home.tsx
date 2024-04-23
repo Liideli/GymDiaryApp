@@ -43,7 +43,7 @@ const Home = () => {
         workouts.map((workout) => (
           <Card
             key={workout.id}
-            style={{ width: "20%", margin: "10px" }}
+            style={{ flex: '1 1 50%', margin: "10px", maxWidth: '300px' }}
             onClick={() => {
               setWorkoutId(workout.id);
               localStorage.setItem("workoutId", JSON.stringify(workout.id));

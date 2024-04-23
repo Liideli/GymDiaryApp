@@ -1,6 +1,4 @@
 #root {
-  padding-left: 4rem;
-  padding-right: 4rem;
   margin: 0 auto;
   text-align: center;
   background-color: #6a6a6a;
@@ -52,7 +50,7 @@ html {
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .card-wrapper {

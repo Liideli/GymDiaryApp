@@ -37,7 +37,7 @@ const Exercise = () => {
       <div className="card-list">
       {ownerId ? (
         exercises.map((exercise) => (
-          <Card key={exercise.id} style={{ width: "20%", margin: "10px" }}>
+          <Card key={exercise.id} style={{ flex: '1 1 50%', margin: "10px", maxWidth: '300px' }}>
             <Card.Body>
               <Card.Title>{exercise.name}</Card.Title>
               <Card.Text>
