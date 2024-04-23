@@ -44,7 +44,7 @@ const Login = () => {
       <Form className="mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <FloatingLabel
-            controlId="floatingInput"
+            controlId="floatingInputEmail"
             label="Email address"
             className="mb-3"
           >
@@ -54,7 +54,7 @@ const Login = () => {
 
         <Form.Group controlId="formBasicPassword">
           <FloatingLabel
-            controlId="floatingInput"
+            controlId="floatingInputPassword"
             label="Password"
             className="mb-3"
           >

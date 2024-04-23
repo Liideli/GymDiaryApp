@@ -46,7 +46,7 @@ const Register = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputUsername"
         label="Username"
         className="mb-3"
       >
@@ -56,7 +56,7 @@ const Register = () => {
 
         <Form.Group controlId="formBasicEmail">
           <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputEmail"
         label="Email address"
         className="mb-3"
       >
@@ -66,7 +66,7 @@ const Register = () => {
 
         <Form.Group controlId="formBasicPassword">
           <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputPassword"
         label="Password"
         className="mb-3"
       >
