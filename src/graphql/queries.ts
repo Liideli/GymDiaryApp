@@ -74,4 +74,18 @@ const getExercisesByWorkout = `query ExercisesByWorkout($workout: ID!) {
   }
 }`;
 
-export { login, register, createWorkout, getWorkoutsByOwner, createExercise, getExercisesByWorkout};
+const deleteExercise = `
+mutation deleteExercise($deleteExerciseId: ID!) {
+  deleteExercise(id: $deleteExerciseId) {
+    message
+  }
+}`;
+
+const modifyExercise = `
+mutation modifyExercise($modifyExerciseId: ID!, $input: ExerciseUpdateInput!) {
+  modifyExercise(id: $modifyExerciseId, input: $input) {
+    message
+  }
+}`;
+
+export { login, register, createWorkout, getWorkoutsByOwner, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};

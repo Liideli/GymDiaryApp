@@ -27,7 +27,7 @@ const Home = () => {
     if (ownerId) {
       fetchWorkouts();
     }
-  }, []);
+  }, [apiURL, ownerId]);
 
   return (
     <div className="home">

@@ -19,4 +19,14 @@ type ExerciseTypeInput = {
   workout: string;
 };
 
-export type { ExerciseType, ExerciseTypeInput };
+type ExerciseUpdateInput = {
+  name: string;
+  description: string;
+  weight: number;
+  sets: number;
+  reps: number;
+  duration: number;
+  id: string;
+};
+
+export type { ExerciseType, ExerciseTypeInput, ExerciseUpdateInput };
