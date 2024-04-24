@@ -30,7 +30,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant='primary' onClick={handleShow}>
         Add Workout
       </Button>
 
@@ -60,7 +60,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleAddWorkout}>
+          <Button variant="success" onClick={handleAddWorkout}>
             Add Workout
           </Button>
         </Modal.Footer>

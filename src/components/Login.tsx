@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <Container className="w-50">
-      <h1 className="mt-5 oswald-regular text-white">Login</h1>
+      <h1 className="mt-5 oswald-regular text-white" style={{ color: '#D1FAFF'}}>Login</h1>
       <Form className="mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <FloatingLabel

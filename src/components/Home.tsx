@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import AddWorkoutModal from "./AddWorkoutModal";
 import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
@@ -51,17 +51,23 @@ const Home = () => {
             }}
           >
             <Card.Body>
-              <Card.Title>{workout.title}</Card.Title>
-              <Card.Text>{workout.description}</Card.Text>
-              <Card.Text>
-                {new Date(workout.date).toLocaleDateString()}
-              </Card.Text>
+              <ListGroup variant="flush">
+              <ListGroup.Item><h4>{workout.title}</h4></ListGroup.Item>
+            {workout.description && (
+              <ListGroup.Item>{workout.description}</ListGroup.Item>
+            )}
+              <ListGroup.Item>
+                <div style={{ backgroundColor: "#D1FAFF", borderRadius: "5px" }}>
+                {new Date(workout.date).toLocaleDateString('fi-FI')}
+                </div>
+              </ListGroup.Item>
+            </ListGroup>
             </Card.Body>
           </Card>
         ))
       ) : (
         <div className="mx-auto">
-        <h2>Please login or register to mark down workouts.</h2>
+        <h2 className="mt-5 oswald-regular text-white">Please login or register to mark down workouts.</h2>
         </div>
       )}
       </div>

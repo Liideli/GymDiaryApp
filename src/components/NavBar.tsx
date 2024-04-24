@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { Form } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import { FaUser } from 'react-icons/fa';
+import { LiaDumbbellSolid } from'react-icons/lia';
 
 
 function NavBar() {
@@ -18,7 +19,7 @@ function NavBar() {
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/" className='oswald-semibold'>GymDiary</Navbar.Brand>
+        <Navbar.Brand href="/" className='oswald-semibold'><LiaDumbbellSolid size="2em" />GymDiary</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -31,9 +32,8 @@ function NavBar() {
             ) : (
               <Nav.Link onClick={handleLogout} as={Link} to="/login">Logout</Nav.Link>
             )}
-            <Form.Control type="text" placeholder="Search"/>
           </Nav>
-        {user && <Navbar.Text className='ml-auto'>Signed in as: {user.user_name}</Navbar.Text>}
+        {user && <Navbar.Text className='ml-auto'><FaUser size="1.2em" style={{ marginRight: '10px' }} />{user.user_name}</Navbar.Text>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

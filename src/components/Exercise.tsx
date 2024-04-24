@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import AddExerciseModal from "./AddExerciseModal";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { getExercisesByWorkout } from "../graphql/queries";
@@ -49,15 +49,31 @@ const Exercise = () => {
             >
               <Card.Body>
                 <Card.Title>{exercise.name}</Card.Title>
-                <Card.Text>
-                  {exercise.description &&
-                    `Description: ${exercise.description} \n`}
-                  {exercise.duration !== 0 || null &&
-                    `Duration: ${exercise.duration} seconds \n`}
-                  {exercise.reps !== 0 || null && `Reps: ${exercise.reps} \n`}
-                  {exercise.sets !== 0 || null && `Sets: ${exercise.sets} \n`}
-                  {exercise.weight !== 0 || null && `Weight: ${exercise.weight} kg`}
-                </Card.Text>
+                <ListGroup variant="flush">
+                  {exercise.description && (
+                    <ListGroup.Item>{exercise.description}</ListGroup.Item>
+                  )}
+                  {exercise.duration !== 0 && exercise.duration !== null && (
+                    <ListGroup.Item style={{ textAlign: "left" }}>
+                      <strong>Duration:</strong> {exercise.duration} seconds
+                    </ListGroup.Item>
+                  )}
+                  {exercise.reps !== 0 && exercise.reps !== null && (
+                    <ListGroup.Item style={{ textAlign: "left" }}>
+                      <strong>Reps:</strong> {exercise.reps}
+                    </ListGroup.Item>
+                  )}
+                  {exercise.sets !== 0 && exercise.sets !== null && (
+                    <ListGroup.Item style={{ textAlign: "left" }}>
+                      <strong>Sets:</strong> {exercise.sets}
+                    </ListGroup.Item>
+                  )}
+                  {exercise.weight !== 0 && exercise.weight !== null && (
+                    <ListGroup.Item style={{ textAlign: "left" }}>
+                      <strong>Weight:</strong> {exercise.weight} kg
+                    </ListGroup.Item>
+                  )}
+                </ListGroup>
               </Card.Body>
             </Card>
           ))

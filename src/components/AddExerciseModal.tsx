@@ -98,8 +98,8 @@ const AddExerciseModal: React.FC = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleAddExercise}>
-            Add Workout
+          <Button variant="success" onClick={handleAddExercise}>
+            Add Exercise
           </Button>
         </Modal.Footer>
       </Modal>

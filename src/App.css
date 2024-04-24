@@ -1,11 +1,17 @@
 #root {
   margin: 0 auto;
   text-align: center;
-  background-color: #6a6a6a;
 }
 
 html {
-  background-color: #6a6a6a;
+  height: 100%;
+}
+
+body {
+  background-image: url('./assets/dumbell-svgrepo-com.svg');
+  background-repeat: no-repeat;
+  background-size: 100em;
+  background-position: top;
 }
 
 .oswald-semibold {
@@ -22,20 +28,8 @@ html {
   font-style: normal;
 }
 
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h2 {
+  color: #D1FAFF;
 }
 
 .header {
@@ -44,18 +38,18 @@ html {
   align-items: center;
   justify-content: center;
   height: 10vh;
-  background-color: #6a6a6a;
+  background-color: #ffffff00;
 }
 
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .card-wrapper {
   flex-basis: calc(25% - 1rem);
-  margin-bottom: 1rem; /* Adjust as needed */
+  margin-bottom: 1rem;
 }
 
 /* Responsive adjustments */
