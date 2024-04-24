@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { createExercise } from '../graphql/queries';
 import { doGraphQLFetch } from '../graphql/fetch';
@@ -16,7 +16,10 @@ const AddExerciseModal: React.FC = () => {
   const [duration, setDuration] = useState('');
   const apiURL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem('token')!;
-  const { workoutId } = React.useContext(WorkoutContext);
+  const contextWorkoutId = useContext(WorkoutContext);
+  const savedWorkoutId = JSON.parse(window.localStorage.getItem("workoutId")!);
+
+  const workoutId = contextWorkoutId.workoutId || savedWorkoutId;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

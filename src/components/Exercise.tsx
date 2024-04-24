@@ -52,11 +52,11 @@ const Exercise = () => {
                 <Card.Text>
                   {exercise.description &&
                     `Description: ${exercise.description} \n`}
-                  {exercise.duration !== 0 &&
+                  {exercise.duration !== 0 || null &&
                     `Duration: ${exercise.duration} seconds \n`}
-                  {exercise.reps !== 0 && `Reps: ${exercise.reps} \n`}
-                  {exercise.sets !== 0 && `Sets: ${exercise.sets} \n`}
-                  {exercise.weight !== 0 && `Weight: ${exercise.weight} kg`}
+                  {exercise.reps !== 0 || null && `Reps: ${exercise.reps} \n`}
+                  {exercise.sets !== 0 || null && `Sets: ${exercise.sets} \n`}
+                  {exercise.weight !== 0 || null && `Weight: ${exercise.weight} kg`}
                 </Card.Text>
               </Card.Body>
             </Card>
