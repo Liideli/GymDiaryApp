@@ -6,10 +6,12 @@ import { getExercisesByWorkout } from "../graphql/queries";
 import WorkoutContext from "../WorkoutContext";
 import { ExerciseType } from "../types/Exercise";
 import ModifyExerciseModal from "./ModifyExerciseModal";
+import { Spinner } from "react-bootstrap";
 
 const Exercise = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<ExerciseType>();
+  const [isLoading, setIsLoading] = useState(false);
   const [exercises, setExercises] = useState<ExerciseType[]>([]);
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
@@ -21,10 +23,12 @@ const Exercise = () => {
 
   useEffect(() => {
     const fetchExercises = async () => {
+      setIsLoading(true);
       const data = await doGraphQLFetch(apiURL, getExercisesByWorkout, {
         workout: workoutId,
       });
       setExercises(data.exercisesByWorkout);
+      setIsLoading(false);
     };
     if (workoutId && ownerId) {
       fetchExercises();
@@ -37,7 +41,10 @@ const Exercise = () => {
         <AddExerciseModal show={showModal} onHide={() => setShowModal(false)} />
       </div>
       <div className="card-list">
-        {ownerId ? (
+      {isLoading ? (
+        <Spinner variant="white" animation="border" role="status" />
+      ) :
+        ownerId ? (
           exercises.map((exercise) => (
             <Card
               key={exercise.id}
