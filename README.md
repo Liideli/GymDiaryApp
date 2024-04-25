@@ -33,4 +33,4 @@ This project is licensed under the [MIT License](LICENSE), which means you are f
 
 ## Contact
 
-If you have any questions, suggestions, or issues, please feel free to reach out to us at [roope.kasperi.laine@gmail.com](roope.kasperi.laine@gmail.com). We'd love to hear from you!
+If you have any questions, suggestions, or issues, please feel free to reach out to me at [roope.kasperi.laine@gmail.com](roope.kasperi.laine@gmail.com).
