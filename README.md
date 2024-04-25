@@ -22,6 +22,11 @@ To get started with GymDiary client, follow these steps:
 4. Configure environment variables for authentication, database connection, etc.
 5. Start the development server with `npm run dev`.
 
+
+## The Backend
+
+The GymDiary backend is available at [https://github.com/Liideli/GymDiary-backend](https://github.com/Liideli/GymDiary-backend).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE), which means you are free to use, modify, and distribute the code as you see fit. However, please note that GymDiary is provided "as is," and we are not liable for any damages or consequences resulting from its use.
