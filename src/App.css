@@ -39,12 +39,32 @@ h2 {
   justify-content: center;
   height: 10vh;
   background-color: #ffffff00;
+  padding: 1em;
 }
 
 .card-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.custom-card {
+  transition: border-radius 0.1s ease-out
+}
+
+.custom-card:hover {
+  border-top-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+.custom-card-exercise {
+  border-radius: 2em;
+  transition: border-radius 0.1s ease-out
+}
+
+.custom-card-exercise:hover {
+  border-bottom-right-radius: 2em;
 }
 
 .card-wrapper {
@@ -69,5 +89,11 @@ h2 {
   .card-wrapper {
     flex-basis: calc(100% - 1rem);
   }
+}
+
+.custom-list-group-item {
+  border-color: #303030;
+  text-align: "left"; 
+  background-color: "#ECEF80";
 }
 

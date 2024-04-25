@@ -47,8 +47,9 @@ const Exercise = () => {
         ownerId ? (
           exercises.map((exercise) => (
             <Card
+              className="custom-card-exercise"
               key={exercise.id}
-              style={{ flex: "1 1 50%", margin: "10px", maxWidth: "300px" }}
+              style={{ flex: "1 1 50%", margin: "10px", maxWidth: "300px", backgroundColor: "#ECEF80" }}
               onClick={() => {
                 setSelectedExercise(exercise);
                 setShowModal(true);
@@ -58,25 +59,25 @@ const Exercise = () => {
                 <Card.Title>{exercise.name}</Card.Title>
                 <ListGroup variant="flush">
                   {exercise.description && (
-                    <ListGroup.Item>{exercise.description}</ListGroup.Item>
+                    <ListGroup.Item style={{ backgroundColor: "#ECEF80", borderColor: "#303030" }}>{exercise.description}</ListGroup.Item>
                   )}
                   {exercise.duration !== 0 && exercise.duration !== null && (
-                    <ListGroup.Item style={{ textAlign: "left" }}>
+                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
                       <strong>Duration:</strong> {exercise.duration} seconds
                     </ListGroup.Item>
                   )}
                   {exercise.reps !== 0 && exercise.reps !== null && (
-                    <ListGroup.Item style={{ textAlign: "left" }}>
+                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
                       <strong>Reps:</strong> {exercise.reps}
                     </ListGroup.Item>
                   )}
                   {exercise.sets !== 0 && exercise.sets !== null && (
-                    <ListGroup.Item style={{ textAlign: "left" }}>
+                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
                       <strong>Sets:</strong> {exercise.sets}
                     </ListGroup.Item>
                   )}
                   {exercise.weight !== 0 && exercise.weight !== null && (
-                    <ListGroup.Item style={{ textAlign: "left" }}>
+                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
                       <strong>Weight:</strong> {exercise.weight} kg
                     </ListGroup.Item>
                   )}

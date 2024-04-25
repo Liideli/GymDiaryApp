@@ -53,6 +53,7 @@ const Home = () => {
         ) : ownerId ? (
           workouts.map((workout) => (
             <Card
+              className="custom-card"
               key={workout.id}
               style={{ flex: "1 1 50%", margin: "10px", maxWidth: "300px" }}
               onClick={() => {
@@ -62,7 +63,7 @@ const Home = () => {
               }}
             >
               <Card.Body>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: "flex", alignItems: "flex-start" }}>
                   <Button
                     variant="secondary"
                     size="sm"

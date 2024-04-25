@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { WorkoutUpdateInput } from "../types/Workout";
 import { doGraphQLFetch } from "../graphql/fetch";
