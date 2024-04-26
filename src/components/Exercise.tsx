@@ -77,7 +77,7 @@ const Exercise = () => {
                     </ListGroup.Item>
                   )}
                   {exercise.weight !== 0 && exercise.weight !== null && (
-                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
+                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF8000", borderColor: "#303030" }}>
                       <strong>Weight:</strong> {exercise.weight} kg
                     </ListGroup.Item>
                   )}

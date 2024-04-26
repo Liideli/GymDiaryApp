@@ -5,7 +5,7 @@ import { WorkoutMessegeResponse } from '../types/WorkoutMessegeResponse';
 import { doGraphQLFetch } from '../graphql/fetch';
 import { createWorkout } from '../graphql/queries';
 
-const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
+const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ onWorkoutAdded }) => {
   const [show, setShow] = useState(false);
   const [workoutName, setWorkoutName] = useState('');
   const [description, setDescription] = useState('');
@@ -20,7 +20,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = () => {
     try {
       const workoutData = await doGraphQLFetch(apiURL, createWorkout, { input: { title: workoutName, description: description, date: date }}, token ) as WorkoutMessegeResponse;
       console.log(workoutData);
-
+      onWorkoutAdded();
     } catch (error) {
       console.error(error);
     }

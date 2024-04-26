@@ -10,12 +10,16 @@ const ModifyWorkoutModal = ({
   show,
   onHide,
   workout,
+  onWorkoutModified,
+  onWorkoutDeleted,
 }: {
   show: boolean;
   onHide: () => void;
   workout: WorkoutUpdateInput;
+  onWorkoutModified: () => void;
+  onWorkoutDeleted: () => void;
 }) => {
-  const [selectedWorkout] = useState(workout);
+  const [selectedWorkout, setSelectedWorkout] = useState(workout);
   const [workoutName, setWorkoutName] = useState(selectedWorkout.title || "");
   const [description, setDescription] = useState(
     selectedWorkout.description || ""
@@ -26,6 +30,7 @@ const ModifyWorkoutModal = ({
   const token = localStorage.getItem("token")!;
 
   useEffect(() => {
+    setSelectedWorkout(workout);
     setWorkoutName(workout.title || "");
     setDescription(workout.description || "");
     setDate(workout.date || "");
@@ -43,6 +48,7 @@ const ModifyWorkoutModal = ({
          input: { title: workoutName, description: description, date: date } },
         token
       )) as WorkoutMessegeResponse;
+      onWorkoutModified();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -59,6 +65,7 @@ const ModifyWorkoutModal = ({
         },
         token
       )) as WorkoutMessegeResponse;
+      onWorkoutDeleted();
     } catch (error) {
       console.error("Error:", error);
     }

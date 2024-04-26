@@ -20,6 +20,7 @@ type WorkoutUpdateInput = {
 
 type AddWorkoutModalProps = {
   onAdd: (workout: WorkoutInput) => void;
+  onWorkoutAdded: () => void;
 };
 
 export type { Workout, WorkoutUpdateInput, AddWorkoutModalProps };

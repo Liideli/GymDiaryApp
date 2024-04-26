@@ -23,19 +23,32 @@ const Home = () => {
   const ownerId = owner ? JSON.parse(owner).id : null;
   const { setWorkoutId } = React.useContext(WorkoutContext);
 
-  useEffect(() => {
-    const fetchWorkouts = async () => {
-      setIsLoading(true);
-      const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
-        owner: ownerId,
-      });
-      setWorkouts(data.workoutsByOwner);
-      setIsLoading(false);
-    };
+  const fetchWorkouts = async () => {
+    setIsLoading(true);
+    const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
+      owner: ownerId,
+    });
+    setWorkouts(data.workoutsByOwner);
+    setIsLoading(false);
+  };
+
+  useEffect(() => { 
     if (ownerId) {
       fetchWorkouts();
     }
   }, [apiURL, ownerId]);
+
+  const handleWorkoutAdded = () => {
+    fetchWorkouts();
+  };
+
+  const handleWorkoutModified = () => {
+    fetchWorkouts();
+  };
+
+  const handleWorkoutDeleted = () => {
+    fetchWorkouts();
+  };
 
   return (
     <div className="home">
@@ -44,6 +57,7 @@ const Home = () => {
           <AddWorkoutModal
             show={showAddModal}
             onHide={() => setShowAddModal(false)}
+            onWorkoutAdded={handleWorkoutAdded}
           />
         )}
       </div>
@@ -51,7 +65,7 @@ const Home = () => {
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
         ) : ownerId ? (
-          workouts.map((workout) => (
+          [...workouts].reverse().map((workout) => (
             <Card
               className="custom-card"
               key={workout.id}
@@ -110,6 +124,8 @@ const Home = () => {
           show={showModifyModal}
           onHide={() => setShowModifyModal(false)}
           workout={selectedWorkout}
+          onWorkoutModified={handleWorkoutModified}
+          onWorkoutDeleted={handleWorkoutDeleted}
         />
       )}
     </div>
