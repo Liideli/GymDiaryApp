@@ -6,7 +6,7 @@ import { ExerciseMessegeResponse } from '../types/ExerciseMessageResponse';
 import WorkoutContext from '../WorkoutContext';
 import React from 'react';
 
-const AddExerciseModal: React.FC = () => {
+const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => void; onExerciseAdded: () => void; }) => {
   const [show, setShow] = useState(false);
   const [exerciseName, setExerciseName] = useState('');
   const [description, setDescription] = useState('');
@@ -43,6 +43,7 @@ const AddExerciseModal: React.FC = () => {
         }, 
         token 
       ) as ExerciseMessegeResponse;
+      onExerciseAdded();
       console.log(exerciseData);
     } catch (error) {
       console.error(error);

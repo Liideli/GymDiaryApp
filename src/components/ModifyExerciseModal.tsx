@@ -9,10 +9,14 @@ const ModifyExerciseModal = ({
   show,
   onHide,
   exercise,
+  onExerciseModified,
+  onExerciseDeleted,
 }: {
   show: boolean;
   onHide: () => void;
   exercise: ExerciseUpdateInput;
+  onExerciseModified: () => void;
+  onExerciseDeleted: () => void;
 }) => {
   const [selectedExercise] = useState(exercise);
   const [name, setName] = useState(selectedExercise.name || "");
@@ -47,6 +51,7 @@ const ModifyExerciseModal = ({
         },
         token
       );
+      onExerciseModified();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -63,6 +68,7 @@ const ModifyExerciseModal = ({
         },
         token
       );
+      onExerciseDeleted();
     } catch (error) {
       console.error("Error:", error);
     }

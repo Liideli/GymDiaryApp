@@ -21,35 +21,56 @@ const Exercise = () => {
 
   const workoutId = contextWorkoutId.workoutId || savedWorkoutId;
 
+  const fetchExercises = async () => {
+    setIsLoading(true);
+    const data = await doGraphQLFetch(apiURL, getExercisesByWorkout, {
+      workout: workoutId,
+    });
+    setExercises(data.exercisesByWorkout);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const fetchExercises = async () => {
-      setIsLoading(true);
-      const data = await doGraphQLFetch(apiURL, getExercisesByWorkout, {
-        workout: workoutId,
-      });
-      setExercises(data.exercisesByWorkout);
-      setIsLoading(false);
-    };
     if (workoutId && ownerId) {
       fetchExercises();
     }
   }, [apiURL, ownerId, workoutId]);
 
+  const handleExerciseAdded = () => {
+    fetchExercises();
+  };
+
+  const handleExerciseModified = () => {
+    fetchExercises();
+  };
+
+  const handleExerciseDeleted = () => {
+    fetchExercises();
+  };
+
   return (
     <div className="exercise">
       <div className="header">
-        <AddExerciseModal show={showModal} onHide={() => setShowModal(false)} />
+        <AddExerciseModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          onExerciseAdded={handleExerciseAdded}
+        />
       </div>
       <div className="card-list">
-      {isLoading ? (
-        <Spinner variant="white" animation="border" role="status" />
-      ) :
-        ownerId ? (
-          exercises.map((exercise) => (
+        {isLoading ? (
+          <Spinner variant="white" animation="border" role="status" />
+        ) : ownerId ? (
+          [...exercises].reverse().map((exercise) => (
             <Card
               className="custom-card-exercise"
               key={exercise.id}
-              style={{ flex: "1 1 50%", margin: "10px", maxWidth: "300px", backgroundColor: "#ECEF80" }}
+              style={{
+                flex: "1 1 50%",
+                margin: "10px",
+                maxWidth: "300px",
+                backgroundColor: "#ECEF80",
+              }}
               onClick={() => {
                 setSelectedExercise(exercise);
                 setShowModal(true);
@@ -59,25 +80,56 @@ const Exercise = () => {
                 <Card.Title>{exercise.name}</Card.Title>
                 <ListGroup variant="flush">
                   {exercise.description && (
-                    <ListGroup.Item style={{ backgroundColor: "#ECEF80", borderColor: "#303030" }}>{exercise.description}</ListGroup.Item>
+                    <ListGroup.Item
+                      style={{
+                        backgroundColor: "#ECEF80",
+                        borderColor: "#303030",
+                      }}
+                    >
+                      {exercise.description}
+                    </ListGroup.Item>
                   )}
                   {exercise.duration !== 0 && exercise.duration !== null && (
-                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
+                    <ListGroup.Item
+                      style={{
+                        textAlign: "left",
+                        backgroundColor: "#ECEF80",
+                        borderColor: "#303030",
+                      }}
+                    >
                       <strong>Duration:</strong> {exercise.duration} seconds
                     </ListGroup.Item>
                   )}
                   {exercise.reps !== 0 && exercise.reps !== null && (
-                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
+                    <ListGroup.Item
+                      style={{
+                        textAlign: "left",
+                        backgroundColor: "#ECEF80",
+                        borderColor: "#303030",
+                      }}
+                    >
                       <strong>Reps:</strong> {exercise.reps}
                     </ListGroup.Item>
                   )}
                   {exercise.sets !== 0 && exercise.sets !== null && (
-                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF80", borderColor: "#303030" }}>
+                    <ListGroup.Item
+                      style={{
+                        textAlign: "left",
+                        backgroundColor: "#ECEF80",
+                        borderColor: "#303030",
+                      }}
+                    >
                       <strong>Sets:</strong> {exercise.sets}
                     </ListGroup.Item>
                   )}
                   {exercise.weight !== 0 && exercise.weight !== null && (
-                    <ListGroup.Item style={{ textAlign: "left", backgroundColor: "#ECEF8000", borderColor: "#303030" }}>
+                    <ListGroup.Item
+                      style={{
+                        textAlign: "left",
+                        backgroundColor: "#ECEF8000",
+                        borderColor: "#303030",
+                      }}
+                    >
                       <strong>Weight:</strong> {exercise.weight} kg
                     </ListGroup.Item>
                   )}
@@ -96,6 +148,8 @@ const Exercise = () => {
           show={showModal}
           onHide={() => setShowModal(false)}
           exercise={selectedExercise}
+          onExerciseModified={handleExerciseModified}
+          onExerciseDeleted={handleExerciseDeleted}
         />
       )}
     </div>
