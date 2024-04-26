@@ -33,7 +33,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ onWorkoutAdded }) => 
     <>
       <div className="add-button" onClick={handleShow}><FaPlus className="plus-icon" size="1.5em" /></div>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Workout</Modal.Title>
         </Modal.Header>

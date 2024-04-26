@@ -76,7 +76,7 @@ const ModifyExerciseModal = ({
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal centered show={show} onHide={handleClose} style={{ zIndex: 10000 }}>
       <Modal.Header closeButton>
         <Modal.Title>Modify Exercise</Modal.Title>
       </Modal.Header>

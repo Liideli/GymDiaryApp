@@ -57,7 +57,7 @@ const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => vo
       <div className="add-button" onClick={handleShow}><FaPlus className="plus-icon" size="1.5em" /></div>
 
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose} style={{ zIndex: 10000 }}>
         <Modal.Header closeButton>
           <Modal.Title>Add Exercise</Modal.Title>
         </Modal.Header>

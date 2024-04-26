@@ -51,11 +51,13 @@ const Exercise = () => {
   return (
     <div className="exercise">
       <div className="header">
+        <div className="add-workout-button">
         <AddExerciseModal
           show={showModal}
           onHide={() => setShowModal(false)}
           onExerciseAdded={handleExerciseAdded}
-        />
+          />
+          </div>
       </div>
       <div className="card-list">
         {isLoading ? (

@@ -130,7 +130,7 @@ button.button-blue:hover {
     border-radius: 2em;
     position: fixed;
     right: 2em;
-    bottom: 2em;
+    bottom: 5em;
     z-index: 9999;
   }
   .header {
@@ -142,8 +142,8 @@ button.button-blue:hover {
 }
 
 .add-button {
-  width: 3em;
-  height: 3em;
+  width: 3.5em;
+  height: 3.5em;
   background-color: #2767f1;
   border-radius: 2em;
   text-align: center;
