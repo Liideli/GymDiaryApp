@@ -4,6 +4,7 @@ import { AddWorkoutModalProps } from '../types/Workout';
 import { WorkoutMessegeResponse } from '../types/WorkoutMessegeResponse';
 import { doGraphQLFetch } from '../graphql/fetch';
 import { createWorkout } from '../graphql/queries';
+import { FaPlus } from 'react-icons/fa';
 
 const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ onWorkoutAdded }) => {
   const [show, setShow] = useState(false);
@@ -30,9 +31,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ onWorkoutAdded }) => 
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
-        Add Workout
-      </Button>
+      <div className="add-button" onClick={handleShow}><FaPlus className="plus-icon" size="1.5em" /></div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

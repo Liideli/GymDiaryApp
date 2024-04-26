@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import { FaUser } from 'react-icons/fa';
+import { FaFire, FaUser } from 'react-icons/fa';
 import { LiaDumbbellSolid } from'react-icons/lia';
 
 
@@ -19,7 +19,7 @@ function NavBar() {
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/" className='oswald-semibold'><LiaDumbbellSolid size="2em" />GymDiary</Navbar.Brand>
+        <Navbar.Brand href="/" className='oswald-semibold'><LiaDumbbellSolid className="dumbbell-icon" size="2em" />GymDiary</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

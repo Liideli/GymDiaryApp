@@ -28,6 +28,14 @@ body {
   font-style: normal;
 }
 
+.dumbbell-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.oswald-semibold:hover .dumbbell-icon {
+  transform: rotate(-15deg);
+}
+
 h2 {
   color: #D1FAFF;
 }
@@ -42,11 +50,16 @@ h2 {
   padding: 1em;
 }
 
+.login-register-container {
+  margin-left: 14em;
+  margin-right: 14em;
+}
+
 .card-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .custom-card {
@@ -77,6 +90,10 @@ h2 {
   .card-wrapper {
     flex-basis: calc(33.333% - 1rem);
   }
+  .login-register-container {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
 }
 
 @media (max-width: 768px) {
@@ -93,7 +110,44 @@ h2 {
 
 .custom-list-group-item {
   border-color: #303030;
-  text-align: "left"; 
-  background-color: "#ECEF80";
+  text-align: left; 
+  background-color: #ECEF80;
 }
 
+@media screen and (max-width: 600px) {
+  .add-workout-button {
+    display: block;
+    border-radius: 2em;
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    z-index: 9999;
+  }
+  .header {
+    height: 0;
+  }
+  .login-register-container {
+    margin: 0;
+  }
+}
+
+.add-button {
+  width: 3em;
+  height: 3em;
+  background-color: #2767f1;
+  border-radius: 2em;
+  text-align: center;
+  align-content: center;
+}
+
+.add-button:hover {
+  background-color: #2159d1;
+}
+
+.plus-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.add-button:hover .plus-icon {
+  transform: rotate(45deg);
+}

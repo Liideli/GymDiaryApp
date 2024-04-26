@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Badge, Button, Card, ListGroup } from "react-bootstrap";
 import AddWorkoutModal from "./AddWorkoutModal";
 import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
@@ -54,11 +54,13 @@ const Home = () => {
     <div className="home">
       <div className="header">
         {ownerId && (
+          <div className="add-workout-button">
           <AddWorkoutModal
             show={showAddModal}
             onHide={() => setShowAddModal(false)}
             onWorkoutAdded={handleWorkoutAdded}
           />
+        </div>
         )}
       </div>
       <div className="card-list">
@@ -77,7 +79,7 @@ const Home = () => {
               }}
             >
               <Card.Body>
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
                   <Button
                     variant="secondary"
                     size="sm"
@@ -89,9 +91,10 @@ const Home = () => {
                   >
                     <FaPen />
                   </Button>
-                  <ListGroup.Item style={{ marginLeft: "1em" }}>
+                  <ListGroup.Item>
                     <h4>{workout.title}</h4>
                   </ListGroup.Item>
+                  <div style={{width: "2em"}}>{" "}</div>
                 </div>
                 <ListGroup variant="flush">
                   {workout.description && (

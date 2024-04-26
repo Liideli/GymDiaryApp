@@ -17,9 +17,6 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Email:', username);
-    console.log('Password:', password);
 
     const loginCredentials: LoginCredentials = {
       username: username,
@@ -39,9 +36,9 @@ const Login = () => {
 };
 
   return (
-    <Container className="w-50">
+    <Container className="w-75">
       <h1 className="mt-5 oswald-regular text-white" style={{ color: '#D1FAFF'}}>Login</h1>
-      <Form className="mt-3" onSubmit={handleSubmit}>
+      <Form className="login-register-container mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <FloatingLabel
             controlId="floatingInputEmail"

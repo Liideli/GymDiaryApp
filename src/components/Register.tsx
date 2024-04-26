@@ -41,9 +41,9 @@ const Register = () => {
   };
 
   return (
-    <Container className="w-50">
+    <Container className="w-75">
       <h1 className="mt-5 oswald-regular text-white">Register</h1>
-      <Form onSubmit={handleSubmit}>
+      <Form className="login-register-container mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <FloatingLabel
         controlId="floatingInputUsername"

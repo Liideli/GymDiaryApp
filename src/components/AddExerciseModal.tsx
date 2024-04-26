@@ -4,7 +4,7 @@ import { createExercise } from '../graphql/queries';
 import { doGraphQLFetch } from '../graphql/fetch';
 import { ExerciseMessegeResponse } from '../types/ExerciseMessageResponse';
 import WorkoutContext from '../WorkoutContext';
-import React from 'react';
+import { FaPlus } from 'react-icons/fa';
 
 const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => void; onExerciseAdded: () => void; }) => {
   const [show, setShow] = useState(false);
@@ -54,9 +54,8 @@ const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => vo
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Exercise
-      </Button>
+      <div className="add-button" onClick={handleShow}><FaPlus className="plus-icon" size="1.5em" /></div>
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
