@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import { FaFire, FaUser } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { LiaDumbbellSolid } from'react-icons/lia';
 
 

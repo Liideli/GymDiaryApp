@@ -114,7 +114,7 @@ const ModifyWorkoutModal = ({
       <Button variant="danger" onClick={handleDeleteWorkout}>
           <FaTrash /> Delete
         </Button>
-        <Button variant="success" onClick={handleModifyWorkout}>
+        <Button className="button-blue" onClick={handleModifyWorkout}>
           Modify Workout
         </Button>
       </Modal.Footer>

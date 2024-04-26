@@ -55,6 +55,16 @@ h2 {
   margin-right: 14em;
 }
 
+button.button-blue {
+  background-color: #2767f1;
+  text-align: center;
+  align-content: center;
+}
+
+button.button-blue:hover {
+  background-color: #2159d1;
+}
+
 .card-list {
   display: flex;
   flex-wrap: wrap;

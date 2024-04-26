@@ -137,7 +137,7 @@ const ModifyExerciseModal = ({
         <Button variant="danger" onClick={handleDeleteExercise}>
           <FaTrash /> Delete
         </Button>
-        <Button variant="primary" onClick={handleModifyExercise}>
+        <Button className="button-blue" onClick={handleModifyExercise}>
           Save Changes
         </Button>
       </Modal.Footer>

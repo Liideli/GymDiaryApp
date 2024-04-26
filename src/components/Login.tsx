@@ -59,7 +59,7 @@ const Login = () => {
           </FloatingLabel>
         </Form.Group>
         
-        <Button variant="primary" type="submit">
+        <Button className="button-blue" type="submit">
           Login
         </Button>
       </Form>

@@ -74,7 +74,7 @@ const Register = () => {
           </FloatingLabel>
         </Form.Group>
         
-        <Button variant="primary" type="submit">
+        <Button className="button-blue" type="submit">
           Register
         </Button>
       </Form>
