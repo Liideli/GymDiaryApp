@@ -19,7 +19,8 @@ type WorkoutUpdateInput = {
 };
 
 type AddWorkoutModalProps = {
-  onAdd: (workout: WorkoutInput) => void;
+  show: boolean;
+  onHide: () => void;
   onWorkoutAdded: () => void;
 };
 

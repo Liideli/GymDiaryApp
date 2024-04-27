@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup } from "react-bootstrap";
 import AddWorkoutModal from "./AddWorkoutModal";
 import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
@@ -64,6 +64,15 @@ const Home = () => {
         )}
       </div>
       <div className="card-list">
+      {selectedWorkout && (
+        <ModifyWorkoutModal
+          show={showModifyModal}
+          onHide={() => setShowModifyModal(false)}
+          workout={selectedWorkout}
+          onWorkoutModified={handleWorkoutModified}
+          onWorkoutDeleted={handleWorkoutDeleted}
+        />
+      )}
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
         ) : ownerId ? (
@@ -122,15 +131,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      {selectedWorkout && (
-        <ModifyWorkoutModal
-          show={showModifyModal}
-          onHide={() => setShowModifyModal(false)}
-          workout={selectedWorkout}
-          onWorkoutModified={handleWorkoutModified}
-          onWorkoutDeleted={handleWorkoutDeleted}
-        />
-      )}
     </div>
   );
 };

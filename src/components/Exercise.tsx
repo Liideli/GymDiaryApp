@@ -8,6 +8,7 @@ import { ExerciseType } from "../types/Exercise";
 import ModifyExerciseModal from "./ModifyExerciseModal";
 import { Spinner } from "react-bootstrap";
 
+
 const Exercise = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<ExerciseType>();
@@ -59,6 +60,15 @@ const Exercise = () => {
           />
           </div>
       </div>
+      {selectedExercise && (
+        <ModifyExerciseModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          exercise={selectedExercise}
+          onExerciseModified={handleExerciseModified}
+          onExerciseDeleted={handleExerciseDeleted}
+        />
+      )}
       <div className="card-list">
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
@@ -145,15 +155,6 @@ const Exercise = () => {
           </div>
         )}
       </div>
-      {selectedExercise && (
-        <ModifyExerciseModal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          exercise={selectedExercise}
-          onExerciseModified={handleExerciseModified}
-          onExerciseDeleted={handleExerciseDeleted}
-        />
-      )}
     </div>
   );
 };

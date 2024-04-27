@@ -5,6 +5,8 @@ import { doGraphQLFetch } from '../graphql/fetch';
 import { ExerciseMessegeResponse } from '../types/ExerciseMessageResponse';
 import WorkoutContext from '../WorkoutContext';
 import { FaPlus } from 'react-icons/fa';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => void; onExerciseAdded: () => void; }) => {
   const [show, setShow] = useState(false);
@@ -20,12 +22,19 @@ const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => vo
   const savedWorkoutId = JSON.parse(window.localStorage.getItem("workoutId")!);
 
   const workoutId = contextWorkoutId.workoutId || savedWorkoutId;
+  const [validated, setValidated] = useState(false);
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleAddExercise = async () => {
-    
+  const handleAddExercise = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setValidated(true);
+    if (!exerciseName) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
     try {
       const exerciseData = await doGraphQLFetch(
         apiURL, 
@@ -62,10 +71,13 @@ const AddExerciseModal = ({ onExerciseAdded }: { show: boolean; onHide: () => vo
           <Modal.Title>Add Exercise</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleAddExercise}>
             <Form.Group controlId="formWorkoutName">
               <Form.Label>Exercise Name:</Form.Label>
-              <Form.Control type="text" placeholder="Enter exercise name" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} />
+              <Form.Control type="text" placeholder="Enter exercise name" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} required/>
+              <Form.Control.Feedback type="invalid">
+              Please provide a name.
+            </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formDescription">

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { deleteExercise, modifyExercise } from "../graphql/queries";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { ExerciseUpdateInput } from "../types/Exercise";
 import { FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModifyExerciseModal = ({
   show,
@@ -18,7 +20,7 @@ const ModifyExerciseModal = ({
   onExerciseModified: () => void;
   onExerciseDeleted: () => void;
 }) => {
-  const [selectedExercise] = useState(exercise);
+  const [selectedExercise, setSelectedExercise] = useState(exercise);
   const [name, setName] = useState(selectedExercise.name || "");
   const [description, setDescription] = useState(
     selectedExercise.description || ""
@@ -27,13 +29,30 @@ const ModifyExerciseModal = ({
   const [reps, setReps] = useState(selectedExercise.reps || 0);
   const [weight, setWeight] = useState(selectedExercise.weight || 0);
   const [duration, setDuration] = useState(selectedExercise.duration || 0);
+  const [validated, setValidated] = useState(false);
 
   const apiURL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token")!;
 
   const handleClose = () => onHide();
 
-  const handleModifyExercise = async () => {
+  useEffect(() => {
+    setSelectedExercise(exercise);
+    setName(exercise.name || "");
+    setDescription(exercise.description || "");
+    setSets(exercise.sets || 0);
+    setReps(exercise.reps || 0);
+    setWeight(exercise.weight || 0);
+    setDuration(exercise.duration || 0);
+  }, [exercise]);
+
+  const handleModifyExercise = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setValidated(true);
+    if (!name) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
     try {
       await doGraphQLFetch(
         apiURL,
@@ -52,8 +71,10 @@ const ModifyExerciseModal = ({
         token
       );
       onExerciseModified();
+      toast.success("Exercise modified successfully!");
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Failed to modify exercise!");
     }
     handleClose();
   };
@@ -69,8 +90,10 @@ const ModifyExerciseModal = ({
         token
       );
       onExerciseDeleted();
+      toast.success("Exercise deleted successfully!");
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Failed to delete exercise!");
     }
     handleClose();
   };
@@ -81,14 +104,18 @@ const ModifyExerciseModal = ({
         <Modal.Title>Modify Exercise</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleModifyExercise}>
+        <Form onSubmit={handleModifyExercise} noValidate validated={validated}>
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a name.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
@@ -124,7 +151,7 @@ const ModifyExerciseModal = ({
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Duration</Form.Label>
+            <Form.Label>Duration {"(seconds)"}</Form.Label>
             <Form.Control
               type="number"
               value={duration}

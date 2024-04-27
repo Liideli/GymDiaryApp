@@ -44,6 +44,7 @@ function App() {
       </Router>
       </WorkoutContext.Provider>
     </UserContext.Provider>
+    
   );
 }
 

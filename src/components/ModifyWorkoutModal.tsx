@@ -5,6 +5,8 @@ import { doGraphQLFetch } from "../graphql/fetch";
 import { WorkoutMessegeResponse } from "../types/WorkoutMessegeResponse";
 import { deleteWorkout, modifyWorkout } from "../graphql/queries";
 import { FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModifyWorkoutModal = ({
   show,
@@ -24,7 +26,8 @@ const ModifyWorkoutModal = ({
   const [description, setDescription] = useState(
     selectedWorkout.description || ""
   );
-  const [date, setDate] = useState(selectedWorkout.date || "");
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0] || "");
+  const [validated, setValidated] = useState(false);
 
   const apiURL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token")!;
@@ -33,24 +36,33 @@ const ModifyWorkoutModal = ({
     setSelectedWorkout(workout);
     setWorkoutName(workout.title || "");
     setDescription(workout.description || "");
-    setDate(workout.date || "");
+    setDate(workout.date ? new Date(workout.date).toISOString().split("T")[0] : "");
   }, [workout]);
 
   const handleClose = () => onHide();
 
-  const handleModifyWorkout = async () => {
+  const handleModifyWorkout = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setValidated(true);
+    if (!workoutName || !date) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
     try {
       (await doGraphQLFetch(
         apiURL,
         modifyWorkout,
         {
-        modifyWorkoutId: selectedWorkout.id,
-         input: { title: workoutName, description: description, date: date } },
+          modifyWorkoutId: selectedWorkout.id,
+          input: { title: workoutName, description: description, date: date },
+        },
         token
       )) as WorkoutMessegeResponse;
       onWorkoutModified();
+      toast.success("Workout modified successfully!");
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Failed to modify workout!");
     }
     handleClose();
   };
@@ -66,19 +78,22 @@ const ModifyWorkoutModal = ({
         token
       )) as WorkoutMessegeResponse;
       onWorkoutDeleted();
+      toast.success("Workout deleted successfully!");
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Failed to delete workout!");
     }
     handleClose();
   };
 
   return (
+    <>
     <Modal centered show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Modify Workout</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form noValidate validated={validated}>
           <Form.Group controlId="formWorkoutName">
             <Form.Label>Workout Name</Form.Label>
             <Form.Control
@@ -86,7 +101,11 @@ const ModifyWorkoutModal = ({
               placeholder="Enter workout name"
               value={workoutName}
               onChange={(e) => setWorkoutName(e.target.value)}
+              required
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a workout name.
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group controlId="formDescription">
@@ -104,14 +123,18 @@ const ModifyWorkoutModal = ({
             <Form.Label>Date</Form.Label>
             <Form.Control
               type="date"
-              value={new Date(date).toISOString().slice(0, 10)}
+              value={date ? new Date(date).toISOString().slice(0, 10) : ""}
               onChange={(e) => setDate(e.target.value)}
+              required
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a date.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-      <Button variant="danger" onClick={handleDeleteWorkout}>
+        <Button variant="danger" onClick={handleDeleteWorkout}>
           <FaTrash /> Delete
         </Button>
         <Button className="button-blue" onClick={handleModifyWorkout}>
@@ -119,6 +142,7 @@ const ModifyWorkoutModal = ({
         </Button>
       </Modal.Footer>
     </Modal>
+    </>
   );
 };
 
