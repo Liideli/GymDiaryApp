@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     const loginCredentials: LoginCredentials = {
-      username: username,
+      user_name: username,
       password: password,
     };
 

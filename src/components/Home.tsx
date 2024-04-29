@@ -78,9 +78,9 @@ const Home = () => {
         ) : ownerId ? (
           [...workouts].reverse().map((workout) => (
             <Card
-              className="custom-card"
+              className="custom-card card"
               key={workout.id}
-              style={{ flex: "1 1 50%", margin: "10px", maxWidth: "300px" }}
+              style={{ flex: "1 1 50%", margin: "10px" }}
               onClick={() => {
                 setWorkoutId(workout.id);
                 localStorage.setItem("workoutId", JSON.stringify(workout.id));

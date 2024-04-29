@@ -10,8 +10,10 @@ html {
 body {
   background-image: url('./assets/dumbell-svgrepo-com.svg');
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: 100em;
   background-position: top;
+  background-color: #303030;
 }
 
 .oswald-semibold {
@@ -73,6 +75,7 @@ button.button-blue:hover {
 }
 
 .custom-card {
+  max-width: 300px;
   transition: border-radius 0.1s ease-out
 }
 
@@ -103,6 +106,11 @@ button.button-blue:hover {
   .login-register-container {
     margin-left: 4em;
     margin-right: 4em;
+  }
+  @media (min-width: 992px) {
+    .navbar-back-button {
+      display: none;
+    }
   }
 }
 
@@ -138,6 +146,9 @@ button.button-blue:hover {
   }
   .login-register-container {
     margin: 0;
+  }
+  .card {
+    max-width: 400px;
   }
 }
 

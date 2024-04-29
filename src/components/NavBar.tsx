@@ -17,7 +17,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
         <Navbar.Brand href="/" className='oswald-semibold'><LiaDumbbellSolid className="dumbbell-icon" size="2em" />GymDiary</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
