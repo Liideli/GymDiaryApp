@@ -41,7 +41,7 @@ const Home = () => {
   }, [apiURL, ownerId]);
 
   useEffect(() => {
-    setWorkouts(searchResults?.workoutBySearch || []);
+    setWorkouts(searchResults || []);
     console.log("Search results set as workouts", searchResults);
   }, [searchResults]);
 

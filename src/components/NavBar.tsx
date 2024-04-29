@@ -35,12 +35,12 @@ function NavBar() {
     }
   }
 
-  const handleSearch = async (searchTerm: string) => {
+  const handleSearch = async (searchTerm: string): Promise<void> => {
     const searchedWorkouts = await doGraphQLFetch(apiURL, workoutBySearch, {
       search: searchTerm,
       owner: ownerId,
     });
-    setSearchResults(searchedWorkouts);
+    setSearchResults(searchedWorkouts.workoutBySearch);
     console.log(searchedWorkouts);
   };
 
