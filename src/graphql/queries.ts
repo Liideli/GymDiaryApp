@@ -44,6 +44,20 @@ const getWorkoutsByOwner = `query WorkoutsByOwner($owner: ID!) {
   }
 }`;
 
+const workoutBySearch = `query WorkoutBySearch($search: String!, $owner: ID!) {
+  workoutBySearch(search: $search, owner: $owner) {
+    id
+    title
+    description
+    date
+    owner {
+      id
+      user_name
+      email
+    }
+  }
+}`;
+
 const deleteWorkout = `mutation DeleteWorkout($deleteWorkoutId: ID!) {
   deleteWorkout(id: $deleteWorkoutId) {
     message
@@ -101,4 +115,4 @@ mutation modifyExercise($modifyExerciseId: ID!, $input: ExerciseUpdateInput!) {
   }
 }`;
 
-export { login, register, createWorkout, getWorkoutsByOwner, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};
+export { login, register, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};

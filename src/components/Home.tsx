@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import AddWorkoutModal from "./AddWorkoutModal";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,15 @@ import { doGraphQLFetch } from "../graphql/fetch";
 import { getWorkoutsByOwner } from "../graphql/queries";
 import { Workout } from "../types/Workout";
 import { WorkoutContext } from "../WorkoutContext";
-import React from "react";
 import { Spinner } from "react-bootstrap";
 import { FaPen } from "react-icons/fa";
 import ModifyWorkoutModal from "./ModifyWorkoutModal";
+import { SearchContext } from "../SearchContext";
+
 
 const Home = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const { searchResults } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showModifyModal, setShowModifyModal] = useState(false);
@@ -21,7 +23,7 @@ const Home = () => {
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
   const ownerId = owner ? JSON.parse(owner).id : null;
-  const { setWorkoutId } = React.useContext(WorkoutContext);
+  const { setWorkoutId } = useContext(WorkoutContext);
 
   const fetchWorkouts = async () => {
     setIsLoading(true);
@@ -37,6 +39,11 @@ const Home = () => {
       fetchWorkouts();
     }
   }, [apiURL, ownerId]);
+
+  useEffect(() => {
+    setWorkouts(searchResults?.workoutBySearch || []);
+    console.log("Search results set as workouts", searchResults);
+  }, [searchResults]);
 
   const handleWorkoutAdded = () => {
     fetchWorkouts();

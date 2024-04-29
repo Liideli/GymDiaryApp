@@ -10,11 +10,14 @@ import { UserContext } from './UserContext';
 import { useEffect, useState } from 'react';
 import { User } from './types/User';
 import { WorkoutContext } from './WorkoutContext';
+import { SearchContext } from './SearchContext';
+import { Workout } from './types/Workout';
 
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [workoutId, setWorkoutId] = useState<string | null>(null);
+  const [searchResults, setSearchResults] = useState<Workout[]>([]);
 
   // Load user data from localStorage when the app loads
   useEffect(() => {
@@ -32,6 +35,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser, logout }}>
+      <SearchContext.Provider value={{ searchResults, setSearchResults }}>
       <WorkoutContext.Provider value={{ workoutId, setWorkoutId }}>
       <Router>
         <NavBar />
@@ -43,6 +47,7 @@ function App() {
         </Routes>
       </Router>
       </WorkoutContext.Provider>
+      </SearchContext.Provider> 
     </UserContext.Provider>
     
   );
