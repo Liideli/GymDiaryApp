@@ -37,7 +37,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser, logout }}>
       <SearchContext.Provider value={{ searchResults, setSearchResults }}>
       <WorkoutContext.Provider value={{ workoutId, setWorkoutId }}>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
