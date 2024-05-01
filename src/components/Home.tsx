@@ -42,7 +42,6 @@ const Home = () => {
 
   useEffect(() => {
     setWorkouts(searchResults || []);
-    console.log("Search results set as workouts", searchResults);
   }, [searchResults]);
 
   const handleWorkoutAdded = () => {
@@ -83,53 +82,61 @@ const Home = () => {
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
         ) : ownerId ? (
-          [...workouts].reverse().map((workout) => (
-            <Card
-              className="custom-card card"
-              key={workout.id}
-              style={{ flex: "1 1 50%", margin: "10px" }}
-              onClick={() => {
-                setWorkoutId(workout.id);
-                localStorage.setItem("workoutId", JSON.stringify(workout.id));
-                navigate(`/exercise/${workout.id}`);
-              }}
-            >
-              <Card.Body>
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      setSelectedWorkout(workout);
-                      setShowModifyModal(true);
-                    }}
-                  >
-                    <FaPen />
-                  </Button>
-                  <ListGroup.Item>
-                    <h4>{workout.title}</h4>
-                  </ListGroup.Item>
-                  <div style={{width: "2em"}}>{" "}</div>
-                </div>
-                <ListGroup variant="flush">
-                  {workout.description && (
-                    <ListGroup.Item>{workout.description}</ListGroup.Item>
-                  )}
-                  <ListGroup.Item>
-                    <div
-                      style={{
-                        backgroundColor: "#D1FAFF",
-                        borderRadius: "5px",
+          workouts.length > 0 ? (
+            [...workouts].reverse().map((workout) => (
+              <Card
+                className="custom-card card"
+                key={workout.id}
+                style={{ flex: "1 1 50%", margin: "10px" }}
+                onClick={() => {
+                  setWorkoutId(workout.id);
+                  localStorage.setItem("workoutId", JSON.stringify(workout.id));
+                  navigate(`/exercise/${workout.id}`);
+                }}
+              >
+                <Card.Body>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setSelectedWorkout(workout);
+                        setShowModifyModal(true);
                       }}
                     >
-                      {new Date(workout.date).toLocaleDateString("fi-FI")}
-                    </div>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          ))
+                      <FaPen />
+                    </Button>
+                    <ListGroup.Item>
+                      <h4>{workout.title}</h4>
+                    </ListGroup.Item>
+                    <div style={{width: "2em"}}>{" "}</div>
+                  </div>
+                  <ListGroup variant="flush">
+                    {workout.description && (
+                      <ListGroup.Item>{workout.description}</ListGroup.Item>
+                    )}
+                    <ListGroup.Item>
+                      <div
+                        style={{
+                          backgroundColor: "#D1FAFF",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        {new Date(workout.date).toLocaleDateString("fi-FI")}
+                      </div>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <div className="mx-auto">
+              <h2 className="mt-5 oswald-regular text-white">
+                Add Workouts
+              </h2>
+            </div>
+          )
         ) : (
           <div className="mx-auto">
             <h2 className="mt-5 oswald-regular text-white">

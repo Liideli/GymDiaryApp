@@ -45,7 +45,7 @@ const Login = () => {
             label="Email address"
             className="mb-3"
           >
-            <Form.Control type="email" placeholder="Enter email" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <Form.Control type="email" placeholder="Enter email" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
           </FloatingLabel>
         </Form.Group>
 
@@ -55,7 +55,7 @@ const Login = () => {
             label="Password"
             className="mb-3"
           >
-            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
           </FloatingLabel>
         </Form.Group>
         

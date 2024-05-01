@@ -88,7 +88,7 @@ const ModifyWorkoutModal = ({
 
   return (
     <>
-    <Modal centered show={show} onHide={onHide}>
+    <Modal centered show={show} onHide={onHide} style={{ zIndex: 10000 }}>
       <Modal.Header closeButton>
         <Modal.Title>Modify Workout</Modal.Title>
       </Modal.Header>

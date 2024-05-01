@@ -53,12 +53,12 @@ const Exercise = () => {
     <div className="exercise">
       <div className="header">
         <div className="add-workout-button">
-        <AddExerciseModal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          onExerciseAdded={handleExerciseAdded}
+          <AddExerciseModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            onExerciseAdded={handleExerciseAdded}
           />
-          </div>
+        </div>
       </div>
       {selectedExercise && (
         <ModifyExerciseModal
@@ -72,7 +72,7 @@ const Exercise = () => {
       <div className="card-list">
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
-        ) : ownerId ? (
+        ) : exercises.length > 0 ? (
           [...exercises].reverse().map((exercise) => (
             <Card
               className="custom-card-exercise"
@@ -151,7 +151,7 @@ const Exercise = () => {
           ))
         ) : (
           <div className="mx-auto">
-            <h2>Please login or register to mark down exercises.</h2>
+            <h2 className="mt-5 oswald-regular text-white">Add Exercises</h2>
           </div>
         )}
       </div>

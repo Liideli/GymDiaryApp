@@ -138,11 +138,12 @@ button.button-blue:hover {
     border-radius: 2em;
     position: fixed;
     right: 2em;
-    bottom: 5em;
+    bottom: 3em;
     z-index: 9999;
   }
   .header {
     height: 0;
+    padding: 0;
   }
   .login-register-container {
     margin: 0;
