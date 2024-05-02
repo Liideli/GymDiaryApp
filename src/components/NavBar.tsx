@@ -87,12 +87,16 @@ function NavBar() {
               </Form>
             )}
           </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/userprofile">
           {user && (
             <Navbar.Text className="ml-auto">
               <FaUser size="1.2em" style={{ marginRight: "10px" }} />
               {user.user_name}
             </Navbar.Text>
           )}
+          </Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

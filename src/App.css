@@ -52,7 +52,7 @@ h2 {
   padding: 1em;
 }
 
-.login-register-container {
+.form-container {
   margin-left: 14em;
   margin-right: 14em;
 }
@@ -103,7 +103,7 @@ button.button-blue:hover {
   .card-wrapper {
     flex-basis: calc(33.333% - 1rem);
   }
-  .login-register-container {
+  .form-container {
     margin-left: 4em;
     margin-right: 4em;
   }
@@ -145,7 +145,7 @@ button.button-blue:hover {
     height: 0;
     padding: 0;
   }
-  .login-register-container {
+  .form-container {
     margin: 0;
   }
   .card {

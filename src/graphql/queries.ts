@@ -23,6 +23,13 @@ mutation Register($user: UserInput!) {
   }
 }`;
 
+const modifyUser = `
+mutation ModifyUser($user: UserInput!, $modifyUserId: ID!) {
+  modifyUser(user: $user, id: $modifyUserId) {
+    message
+  }
+}`;
+
 const createWorkout = `
 mutation CreateWorkout($input: WorkoutInput!) {
   createWorkout(input: $input) {
@@ -115,4 +122,4 @@ mutation modifyExercise($modifyExerciseId: ID!, $input: ExerciseUpdateInput!) {
   }
 }`;
 
-export { login, register, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};
+export { login, register, modifyUser, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};

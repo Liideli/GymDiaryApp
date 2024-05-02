@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Exercise from './components/Exercise';
+import UserProfile from './components/UserProfile';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import { useEffect, useState } from 'react';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exercise/:id" element={<Exercise />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </Router>
       </WorkoutContext.Provider>

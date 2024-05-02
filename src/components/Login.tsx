@@ -25,7 +25,6 @@ const Login = () => {
 
     try {
       const loginData = (await doGraphQLFetch(apiURL, login, {credentials: loginCredentials})) as LoginMessageResponse;
-      console.log(loginData);
       localStorage.setItem('token', loginData.login.token!);
       localStorage.setItem('user', JSON.stringify(loginData.login.user));
       setUser(loginData.login.user);
@@ -37,8 +36,8 @@ const Login = () => {
 
   return (
     <Container className="w-75">
-      <h1 className="mt-5 oswald-regular text-white" style={{ color: '#D1FAFF'}}>Login</h1>
-      <Form className="login-register-container mt-3" onSubmit={handleSubmit}>
+      <h1 className="mt-5 oswald-regular text-white">Login</h1>
+      <Form className="form-container mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <FloatingLabel
             controlId="floatingInputEmail"
