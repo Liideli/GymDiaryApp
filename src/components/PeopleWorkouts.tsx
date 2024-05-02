@@ -1,87 +1,52 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Card, ListGroup } from "react-bootstrap";
-import AddWorkoutModal from "./AddWorkoutModal";
+import { Card, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { getWorkoutsByOwner } from "../graphql/queries";
 import { Workout } from "../types/Workout";
 import { WorkoutContext } from "../WorkoutContext";
 import { Spinner } from "react-bootstrap";
-import { FaPen } from "react-icons/fa";
-import ModifyWorkoutModal from "./ModifyWorkoutModal";
 import { SearchContext } from "../SearchContext";
 
-
-const Home = () => {
+const PeopleWorkouts = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const { searchResults } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showModifyModal, setShowModifyModal] = useState(false);
-  const [selectedWorkout, setSelectedWorkout] = useState<Workout>();
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
-  const owner = localStorage.getItem("user")!;
-  const ownerId = owner ? JSON.parse(owner).id : null;
+  const selectedUser = localStorage.getItem("selectedUser");
+  const selectedUserId = selectedUser ? JSON.parse(selectedUser).id : null;
+  const selectedUserName = selectedUser ? JSON.parse(selectedUser).user_name : null;
   const { setWorkoutId } = useContext(WorkoutContext);
 
   const fetchWorkouts = async () => {
     setIsLoading(true);
     const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
-      owner: ownerId,
+      owner: selectedUserId,
     });
     setWorkouts(data.workoutsByOwner);
     setIsLoading(false);
   };
 
   useEffect(() => { 
-    if (ownerId) {
+    if (selectedUserId) {
       fetchWorkouts();
     }
-  }, [apiURL, ownerId]);
+  } , [selectedUserId]);
 
   useEffect(() => {
     setWorkouts(searchResults || []);
   }, [searchResults]);
 
-  const handleWorkoutAdded = () => {
-    fetchWorkouts();
-  };
-
-  const handleWorkoutModified = () => {
-    fetchWorkouts();
-  };
-
-  const handleWorkoutDeleted = () => {
-    fetchWorkouts();
-  };
-
   return (
     <div className="home">
-      <div className="header">
-        {ownerId && (
-          <div className="add-workout-button">
-          <AddWorkoutModal
-            show={showAddModal}
-            onHide={() => setShowAddModal(false)}
-            onWorkoutAdded={handleWorkoutAdded}
-          />
-        </div>
-        )}
+      <div className="headerDiv">
+        <h2 className="text-white mb-0">{selectedUserName}'s workouts</h2>
       </div>
       <div className="card-list">
-      {selectedWorkout && (
-        <ModifyWorkoutModal
-          show={showModifyModal}
-          onHide={() => setShowModifyModal(false)}
-          workout={selectedWorkout}
-          onWorkoutModified={handleWorkoutModified}
-          onWorkoutDeleted={handleWorkoutDeleted}
-        />
-      )}
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
-        ) : ownerId ? (
+        ) : (
           workouts.length > 0 ? (
             [...workouts].reverse().map((workout) => (
               <Card
@@ -95,22 +60,10 @@ const Home = () => {
                 }}
               >
                 <Card.Body>
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setSelectedWorkout(workout);
-                        setShowModifyModal(true);
-                      }}
-                    >
-                      <FaPen />
-                    </Button>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
                     <ListGroup.Item>
                       <h4>{workout.title}</h4>
                     </ListGroup.Item>
-                    <div style={{width: "2em"}}>{" "}</div>
                   </div>
                   <ListGroup variant="flush">
                     {workout.description && (
@@ -133,20 +86,13 @@ const Home = () => {
           ) : (
             <div className="mx-auto">
               <h2 className="mt-5 oswald-regular text-white">
-                Add Workouts
+                This user is yet to create any workouts.
               </h2>
             </div>
-          )
-        ) : (
-          <div className="mx-auto">
-            <h2 className="mt-5 oswald-regular text-white">
-              Please login or register to mark down workouts.
-            </h2>
-          </div>
-        )}
+          ))}
       </div>
     </div>
   );
 };
 
-export default Home;
+export default PeopleWorkouts;

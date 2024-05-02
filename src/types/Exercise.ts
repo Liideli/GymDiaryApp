@@ -7,6 +7,7 @@ type ExerciseType = {
   reps: number;
   duration: number;
   workout: string;
+  owner: string;
 };
 
 type ExerciseTypeInput = {

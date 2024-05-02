@@ -12,6 +12,8 @@ import { User } from './types/User';
 import { WorkoutContext } from './WorkoutContext';
 import { SearchContext } from './SearchContext';
 import { Workout } from './types/Workout';
+import People from './components/People';
+import PeopleWorkouts from './components/PeopleWorkouts';
 
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exercise/:id" element={<Exercise />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/peopleworkouts/:user_name" element={<PeopleWorkouts />} />
         </Routes>
       </Router>
       </WorkoutContext.Provider>

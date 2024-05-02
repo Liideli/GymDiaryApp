@@ -23,6 +23,16 @@ mutation Register($user: UserInput!) {
   }
 }`;
 
+const getUsers = `
+query getUsers {
+  users {
+    id
+    user_name
+    email
+    workoutCount
+  }
+}`;
+
 const createWorkout = `
 mutation CreateWorkout($input: WorkoutInput!) {
   createWorkout(input: $input) {
@@ -41,6 +51,9 @@ const getWorkoutsByOwner = `query WorkoutsByOwner($owner: ID!) {
     date
     title
     id
+    owner {
+      id
+    }
   }
 }`;
 
@@ -98,6 +111,7 @@ const getExercisesByWorkout = `query ExercisesByWorkout($workout: ID!) {
     sets
     weight
     workout
+    owner
   }
 }`;
 
@@ -115,4 +129,4 @@ mutation modifyExercise($modifyExerciseId: ID!, $input: ExerciseUpdateInput!) {
   }
 }`;
 
-export { login, register, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};
+export { login, register, getUsers, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};

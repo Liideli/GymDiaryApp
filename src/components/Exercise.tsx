@@ -8,7 +8,6 @@ import { ExerciseType } from "../types/Exercise";
 import ModifyExerciseModal from "./ModifyExerciseModal";
 import { Spinner } from "react-bootstrap";
 
-
 const Exercise = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<ExerciseType>();
@@ -17,10 +16,11 @@ const Exercise = () => {
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
   const ownerId = owner ? JSON.parse(owner).id : null;
-  const contextWorkoutId = useContext(WorkoutContext);
-  const savedWorkoutId = JSON.parse(window.localStorage.getItem("workoutId")!);
+  const contextWorkout = useContext(WorkoutContext);
+  const savedWorkout = JSON.parse(window.localStorage.getItem("workout")!);
+  const savedWorkoutId = savedWorkout?.id;
 
-  const workoutId = contextWorkoutId.workoutId || savedWorkoutId;
+  const workoutId = contextWorkout.workoutId || savedWorkoutId;
 
   const fetchExercises = async () => {
     setIsLoading(true);
@@ -52,13 +52,15 @@ const Exercise = () => {
   return (
     <div className="exercise">
       <div className="header">
-        <div className="add-workout-button">
-          <AddExerciseModal
-            show={showModal}
-            onHide={() => setShowModal(false)}
-            onExerciseAdded={handleExerciseAdded}
-          />
-        </div>
+        {ownerId === savedWorkout.owner.id && (
+          <div className="add-workout-button">
+            <AddExerciseModal
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              onExerciseAdded={handleExerciseAdded}
+            />
+          </div>
+        )}
       </div>
       {selectedExercise && (
         <ModifyExerciseModal
@@ -85,7 +87,9 @@ const Exercise = () => {
               }}
               onClick={() => {
                 setSelectedExercise(exercise);
-                setShowModal(true);
+                if (ownerId === exercise.owner) {
+                  setShowModal(true);
+                }
               }}
             >
               <Card.Body>
@@ -149,9 +153,13 @@ const Exercise = () => {
               </Card.Body>
             </Card>
           ))
-        ) : (
+        ) : ownerId === savedWorkout.owner.id ? (
           <div className="mx-auto">
             <h2 className="mt-5 oswald-regular text-white">Add Exercises</h2>
+          </div>
+        ) : (
+          <div className="mx-auto">
+            <h2 className="mt-5 oswald-regular text-white">No exercises in this workout.</h2>
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ type User = {
   id?: string;
   user_name?: string;
   token?: string;
+  workoutCount: number;
 }
 
 type UserContextType = {

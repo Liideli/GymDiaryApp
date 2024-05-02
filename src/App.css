@@ -52,6 +52,15 @@ h2 {
   padding: 1em;
 }
 
+.headerDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  background-color: #ffffff00;
+}
+
 .login-register-container {
   margin-left: 14em;
   margin-right: 14em;
@@ -172,4 +181,16 @@ button.button-blue:hover {
 
 .add-button:hover .plus-icon {
   transform: rotate(45deg);
+}
+
+.gold {
+  background-color: gold !important;
+}
+
+.silver {
+  background-color: silver !important;
+}
+
+.bronze {
+  background-color: #cd7f32 !important;
 }

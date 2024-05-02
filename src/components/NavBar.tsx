@@ -72,7 +72,10 @@ function NavBar() {
                 Logout
               </Nav.Link>
             )}
-            {location.pathname === '/' || ownerId && (
+            <Nav.Link as={Link} to="/people">
+            Leaderboard
+            </Nav.Link>
+            {location.pathname !== '/' || ownerId && (
               <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
                 <FormControl
                   type="search"

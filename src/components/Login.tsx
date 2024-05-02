@@ -25,7 +25,6 @@ const Login = () => {
 
     try {
       const loginData = (await doGraphQLFetch(apiURL, login, {credentials: loginCredentials})) as LoginMessageResponse;
-      console.log(loginData);
       localStorage.setItem('token', loginData.login.token!);
       localStorage.setItem('user', JSON.stringify(loginData.login.user));
       setUser(loginData.login.user);
