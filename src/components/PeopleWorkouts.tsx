@@ -19,20 +19,20 @@ const PeopleWorkouts = () => {
   const selectedUserName = selectedUser ? JSON.parse(selectedUser).user_name : null;
   const { setWorkoutId } = useContext(WorkoutContext);
 
-  const fetchWorkouts = async () => {
-    setIsLoading(true);
-    const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
-      owner: selectedUserId,
-    });
-    setWorkouts(data.workoutsByOwner);
-    setIsLoading(false);
-  };
 
   useEffect(() => { 
+    const fetchWorkouts = async () => {
+      setIsLoading(true);
+      const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
+        owner: selectedUserId,
+      });
+      setWorkouts(data.workoutsByOwner);
+      setIsLoading(false);
+    };
     if (selectedUserId) {
       fetchWorkouts();
     }
-  } , [selectedUserId]);
+  } , [apiURL, selectedUserId]);
 
   useEffect(() => {
     setWorkouts(searchResults || []);
@@ -48,7 +48,7 @@ const PeopleWorkouts = () => {
           <Spinner variant="white" animation="border" role="status" />
         ) : (
           workouts.length > 0 ? (
-            [...workouts].reverse().map((workout) => (
+            [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((workout) => (
               <Card
                 className="custom-card card"
                 key={workout.id}

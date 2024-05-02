@@ -46,8 +46,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exercise/:id" element={<Exercise />} />
-          <Route path="/people" element={<People />} />
-          <Route path="/peopleworkouts/:user_name" element={<PeopleWorkouts />} />
+          <Route path="/leaderboard" element={<People />} />
+          <Route path="/leaderboardworkouts/:user_name" element={<PeopleWorkouts />} />
         </Routes>
       </Router>
       </WorkoutContext.Provider>

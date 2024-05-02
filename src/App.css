@@ -116,10 +116,23 @@ button.button-blue:hover {
     margin-left: 4em;
     margin-right: 4em;
   }
-  @media (min-width: 992px) {
-    .navbar-back-button {
-      display: none;
-    }
+  .header {
+    height: 0;
+    padding: 0;
+  }
+  .add-workout-button {
+    display: block;
+    border-radius: 2em;
+    position: fixed;
+    right: 2em;
+    bottom: 3em;
+    z-index: 9999;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-text {
+    display: none;
   }
 }
 
@@ -142,18 +155,6 @@ button.button-blue:hover {
 }
 
 @media screen and (max-width: 600px) {
-  .add-workout-button {
-    display: block;
-    border-radius: 2em;
-    position: fixed;
-    right: 2em;
-    bottom: 3em;
-    z-index: 9999;
-  }
-  .header {
-    height: 0;
-    padding: 0;
-  }
   .login-register-container {
     margin: 0;
   }

@@ -18,7 +18,6 @@ const People = () => {
     const fetchUsers = async () => {
       setIsLoading(true);
       const userdata = await doGraphQLFetch(apiURL, getUsers, {});
-      console.log("userdata", userdata);
       setUsers(userdata.users);
       setIsLoading(false);
     };
@@ -42,7 +41,7 @@ const People = () => {
               onClick={() => {
                 setSelectedUser(user);
                 localStorage.setItem("selectedUser", JSON.stringify(user));
-                navigate(`/peopleworkouts/${user.user_name}`);
+                navigate(`/leaderboardworkouts/${user.user_name}`);
               }}
             >
               <Card.Body>

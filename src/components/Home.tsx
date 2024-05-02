@@ -38,7 +38,7 @@ const Home = () => {
     if (ownerId) {
       fetchWorkouts();
     }
-  }, [apiURL, ownerId]);
+  }, []);
 
   useEffect(() => {
     setWorkouts(searchResults || []);
@@ -83,7 +83,7 @@ const Home = () => {
           <Spinner variant="white" animation="border" role="status" />
         ) : ownerId ? (
           workouts.length > 0 ? (
-            [...workouts].reverse().map((workout) => (
+            [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((workout) => (
               <Card
                 className="custom-card card"
                 key={workout.id}
