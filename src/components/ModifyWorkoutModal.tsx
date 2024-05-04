@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { WorkoutUpdateInput } from "../types/Workout";
 import { doGraphQLFetch } from "../graphql/fetch";
-import { WorkoutMessegeResponse } from "../types/WorkoutMessegeResponse";
+import { WorkoutMessageResponse } from "../types/WorkoutMessegeResponse";
 import { deleteWorkout, modifyWorkout } from "../graphql/queries";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -57,7 +57,7 @@ const ModifyWorkoutModal = ({
           input: { title: workoutName, description: description, date: date },
         },
         token
-      )) as WorkoutMessegeResponse;
+      )) as WorkoutMessageResponse;
       onWorkoutModified();
       toast.success("Workout modified successfully!");
     } catch (error) {
@@ -76,7 +76,7 @@ const ModifyWorkoutModal = ({
           deleteWorkoutId: selectedWorkout.id,
         },
         token
-      )) as WorkoutMessegeResponse;
+      )) as WorkoutMessageResponse;
       onWorkoutDeleted();
       toast.success("Workout deleted successfully!");
     } catch (error) {

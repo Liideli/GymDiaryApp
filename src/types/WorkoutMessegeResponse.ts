@@ -1,10 +1,10 @@
 import { Workout } from "./Workout";
 
-type WorkoutMessegeResponse = {
+type WorkoutMessageResponse = {
   addWorkout: {
     message: string;
     workout: Workout;
   };
 }
 
-export type { WorkoutMessegeResponse };
+export type { WorkoutMessageResponse };

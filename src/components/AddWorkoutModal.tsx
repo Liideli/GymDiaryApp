@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { AddWorkoutModalProps } from "../types/Workout";
-import { WorkoutMessegeResponse } from "../types/WorkoutMessegeResponse";
+import { WorkoutMessageResponse } from "../types/WorkoutMessegeResponse";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { createWorkout } from "../graphql/queries";
 import { FaPlus } from "react-icons/fa";
@@ -35,7 +35,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({
         createWorkout,
         { input: { title: workoutName, description: description, date: date } },
         token
-      )) as WorkoutMessegeResponse;
+      )) as WorkoutMessageResponse;
       toast.success("Workout added successfully!");
       onWorkoutAdded();
     } catch (error) {
