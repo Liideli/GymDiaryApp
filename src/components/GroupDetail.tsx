@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Spinner } from "react-bootstrap";
 import { getGroup, joinGroup, leaveGroup } from "../graphql/queries";
 import { doGraphQLFetch } from "../graphql/fetch";
 import type { Group } from "../types/Group";
@@ -12,7 +12,7 @@ import ConfirmationModal from "./ConfirmationModal";
 const GroupDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [group, setGroup] = useState<Group | null>(null);
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [, setSelectedUser] = useState<User>();
   const [showModal, setShowModal] = useState(false);
   const [modalAction, setModalAction] = useState("join");
@@ -32,12 +32,12 @@ const GroupDetail = () => {
 
   const checkMembership = (group: Group) => {
     const userId = JSON.parse(localStorage.getItem("user")!).id;
-    const isUserMember = group.members.some(member => member.id === userId);
+    const isUserMember = group.members.some((member) => member.id === userId);
     setIsMember(isUserMember);
   };
 
   const handleGroupAction = () => {
-    setModalAction(isMember ? 'leave' : 'join');
+    setModalAction(isMember ? "leave" : "join");
     setShowModal(true);
   };
 
@@ -68,6 +68,17 @@ const GroupDetail = () => {
   useEffect(() => {
     fetchGroup();
   }, []);
+
+  if (loading) {
+    return (
+      <Spinner
+        variant="white"
+        animation="border"
+        role="status"
+        className="mt-5"
+      />
+    );
+  }
 
   return (
     <div>

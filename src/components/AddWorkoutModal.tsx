@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { AddWorkoutModalProps } from "../types/Workout";
-import { WorkoutMessageResponse } from "../types/WorkoutMessegeResponse";
+import { WorkoutMessageResponse } from "../types/WorkoutMessageResponse";
 import { doGraphQLFetch } from "../graphql/fetch";
 import { createWorkout } from "../graphql/queries";
 import { FaPlus } from "react-icons/fa";
@@ -44,6 +44,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({
     }
     // Close the modal after adding workout
     setShow(false);
+    setValidated(false);
   };
 
   return (
@@ -64,6 +65,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({
                 type="text"
                 placeholder="Enter workout name"
                 value={workoutName}
+                maxLength={20}
                 onChange={(e) => setWorkoutName(e.target.value)}
                 required
               />
@@ -79,6 +81,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({
                 rows={3}
                 placeholder="Enter description (optional)"
                 value={description}
+                maxLength={100}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Form.Group>

@@ -82,7 +82,9 @@ const Groups = () => {
                     ></div>
                     <ListGroup variant="flush">
                       <ListGroup.Item>
+                        <div className="group-name-container">
                         <h4>{group.name}</h4>
+                        </div>
                       </ListGroup.Item>
                       {group.description && (
                         <ListGroup.Item>{group.description}</ListGroup.Item>

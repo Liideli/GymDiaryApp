@@ -96,6 +96,7 @@ const ModifyExerciseModal = ({
       toast.error("Failed to delete exercise!");
     }
     handleClose();
+    setValidated(false);
   };
 
   return (
@@ -110,6 +111,7 @@ const ModifyExerciseModal = ({
             <Form.Control
               type="text"
               value={name}
+              maxLength={20}
               onChange={(e) => setName(e.target.value)}
               required
             />
@@ -122,6 +124,7 @@ const ModifyExerciseModal = ({
             <Form.Control
               type="text"
               value={description}
+              maxLength={100}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>

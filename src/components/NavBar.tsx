@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -16,6 +16,8 @@ import { useLocation } from "react-router-dom";
 function NavBar() {
   const { user, logout } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
+  const [expanded, setExpanded] = useState(false);
+  const navbarRef = useRef(null);
   const { setSearchResults } = useContext(SearchContext);
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
@@ -24,8 +26,8 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.clear();
     logout();
-    window.localStorage.clear();
   };
 
   // Function to add delay to reduce API calls on search input
@@ -47,40 +49,53 @@ function NavBar() {
 
   const debouncedHandleSearch = debounce(handleSearch, 300);
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (navbarRef.current && !(navbarRef.current as HTMLElement).contains(event.target as Node)) {
+      setExpanded(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
+    <Navbar expand="lg" bg="dark" variant="dark" sticky="top" expanded={expanded} ref={navbarRef}>
       <Container>
         <NavbarText className="navbar-back-button">
-        <IoIosArrowBack size= "2em" onClick={() => navigate(-1)} />
+          <IoIosArrowBack size= "2em" onClick={() => navigate(-1)} />
         </NavbarText>
         <Navbar.Brand href="/~roopekl/gymdiary/" className="oswald-semibold">
           <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
           GymDiary
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user && (
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
                 Home
               </Nav.Link>
             )}
             {!user ? (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)}>
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/register">
+                <Nav.Link as={Link} to="/register" onClick={() => setExpanded(false)}>
                   Register
                 </Nav.Link>
               </>
             ) : (
-              <Nav.Link onClick={handleLogout} as={Link} to="/login">
+              <Nav.Link onClick={() => {handleLogout(); setExpanded(false)}} as={Link} to="/login">
                 Logout
               </Nav.Link>
             )}
             {user && (
-              <Nav.Link as={Link} to="/groups">
+              <Nav.Link as={Link} to="/groups" onClick={() => setExpanded(false)}>
                 Groups
               </Nav.Link>
             )}

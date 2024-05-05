@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { WorkoutUpdateInput } from "../types/Workout";
 import { doGraphQLFetch } from "../graphql/fetch";
-import { WorkoutMessageResponse } from "../types/WorkoutMessegeResponse";
+import { WorkoutMessageResponse } from "../types/WorkoutMessageResponse";
 import { deleteWorkout, modifyWorkout } from "../graphql/queries";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -65,6 +65,7 @@ const ModifyWorkoutModal = ({
       toast.error("Failed to modify workout!");
     }
     handleClose();
+    setValidated(false);
   };
 
   const handleDeleteWorkout = async () => {
@@ -100,6 +101,7 @@ const ModifyWorkoutModal = ({
               type="text"
               placeholder="Enter workout name"
               value={workoutName}
+              maxLength={20}
               onChange={(e) => setWorkoutName(e.target.value)}
               required
             />
@@ -115,6 +117,7 @@ const ModifyWorkoutModal = ({
               rows={3}
               placeholder="Enter description (optional)"
               value={description}
+              maxLength={100}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>

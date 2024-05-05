@@ -41,6 +41,7 @@ const CreateGroupModal: React.FC<createGroupModalProps> = ({onGroupCreated}) => 
     }
     // Close the modal after creating group
     setShow(false);
+    setValidated(false);
   };
 
   return (
@@ -61,6 +62,7 @@ const CreateGroupModal: React.FC<createGroupModalProps> = ({onGroupCreated}) => 
                 type="text"
                 placeholder="Enter group name"
                 value={groupName}
+                maxLength={15}
                 onChange={(e) => setGroupName(e.target.value)}
                 required
               />
@@ -75,6 +77,7 @@ const CreateGroupModal: React.FC<createGroupModalProps> = ({onGroupCreated}) => 
                 as="textarea"
                 rows={3}
                 placeholder="Enter description (optional)"
+                maxLength={100}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />

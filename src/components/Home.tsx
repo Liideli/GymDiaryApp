@@ -56,6 +56,34 @@ const Home = () => {
     fetchWorkouts();
   };
 
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      navigate('/login');
+    }
+  }, []);
+
+  const getColorForDay = (date: Date) => {
+    switch (date.getDay()) {
+      case 0:
+        return "#EF946C"; // Sunday
+      case 1:
+        return "#FFB830"; // Monday
+      case 2:
+        return "#FF5733"; // Tuesday
+      case 3:
+        return "#FFC300"; // Wednesday
+      case 4:
+        return "#FF5733"; // Thursday
+      case 5:
+        return "#FFC300"; // Friday
+      case 6:
+        return "#DAF7A6"; // Saturday
+      default:
+        return "#EF946C";
+    }
+  };
+
   return (
     <div className="home">
       <div className="header">
@@ -119,11 +147,18 @@ const Home = () => {
                     <ListGroup.Item>
                       <div
                         style={{
-                          backgroundColor: "#D1FAFF",
-                          borderRadius: "5px",
+                          backgroundColor: getColorForDay(
+                            new Date(workout.date)
+                          ),
+                          borderRadius: "0.5em",
                         }}
                       >
-                        {new Date(workout.date).toLocaleDateString("fi-FI")}
+                        {new Date(workout.date).toLocaleDateString("en-US", {
+                          weekday: "short",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
                       </div>
                     </ListGroup.Item>
                   </ListGroup>
@@ -132,14 +167,14 @@ const Home = () => {
             ))
           ) : (
             <div className="mx-auto">
-              <h2 className="mt-5 oswald-regular text-white">
+              <h2 className="m-5 oswald-regular text-white">
                 No workouts yet. Add one by clicking plus button.
               </h2>
             </div>
           )
         ) : (
           <div className="mx-auto">
-            <h2 className="mt-5 oswald-regular text-white">
+            <h2 className="m-5 oswald-regular text-white">
               Please login or register to mark down workouts.
             </h2>
           </div>

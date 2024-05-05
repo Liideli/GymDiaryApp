@@ -44,7 +44,7 @@ function App() {
       <Router basename={import.meta.env.BASE_URL}>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={user ? <Home /> : <Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exercise/:id" element={<Exercise />} />
