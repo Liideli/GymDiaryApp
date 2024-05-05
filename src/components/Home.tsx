@@ -133,7 +133,7 @@ const Home = () => {
           ) : (
             <div className="mx-auto">
               <h2 className="mt-5 oswald-regular text-white">
-                Add Workouts
+                No workouts yet. Add one by clicking plus button.
               </h2>
             </div>
           )

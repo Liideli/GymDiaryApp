@@ -218,6 +218,54 @@ const deleteGroup = `mutation DeleteGroup($deleteGroupId: ID!) {
   }
 }`;
 
+const joinGroup = `
+mutation JoinGroup($joinGroupId: ID!) {
+  joinGroup(id: $joinGroupId) {
+    group {
+      id
+      name
+      description
+      owner {
+        id
+        user_name
+        email
+        workoutCount
+      }
+      members {
+        id
+        user_name
+        email
+        workoutCount
+      }
+    }
+    message
+  }
+}`;
+
+const leaveGroup = `
+mutation LeaveGroup($leaveGroupId: ID!) {
+  leaveGroup(id: $leaveGroupId) {
+    group {
+      id
+      name
+      description
+      owner {
+        id
+        user_name
+        email
+        workoutCount
+      }
+      members {
+        id
+        user_name
+        email
+        workoutCount
+      }
+    }
+    message
+  }
+}`;
+
 export {
   login,
   register,
@@ -235,4 +283,6 @@ export {
   getGroup,
   getGroups,
   deleteGroup,
+  joinGroup,
+  leaveGroup,
 };

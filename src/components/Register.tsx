@@ -50,7 +50,7 @@ const Register = () => {
         label="Username"
         className="mb-3"
       >
-          <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
           </FloatingLabel>
         </Form.Group>
 
@@ -70,7 +70,7 @@ const Register = () => {
         label="Password"
         className="mb-3"
       >
-          <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
           </FloatingLabel>
         </Form.Group>
         

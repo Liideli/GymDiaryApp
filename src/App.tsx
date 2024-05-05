@@ -13,9 +13,9 @@ import { WorkoutContext } from './WorkoutContext';
 import { SearchContext } from './SearchContext';
 import { Workout } from './types/Workout';
 import People from './components/People';
-import PeopleWorkouts from './components/PeopleWorkouts';
 import Groups from './components/Groups';
 import GroupDetail from './components/GroupDetail';
+import MemberWorkouts from './components/MemberWorkouts';
 
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
           <Route path="/groups" element={<Groups />} />
           <Route path="/group/:id" element={<GroupDetail />} />
           <Route path="/leaderboard" element={<People />} />
-          <Route path="/leaderboardworkouts/:user_name" element={<PeopleWorkouts />} />
+          <Route path="/memberworkouts/:user_name" element={<MemberWorkouts />} />
         </Routes>
       </Router>
       </WorkoutContext.Provider>

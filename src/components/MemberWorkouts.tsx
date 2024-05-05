@@ -7,28 +7,30 @@ import { Workout } from "../types/Workout";
 import { WorkoutContext } from "../WorkoutContext";
 import { Spinner } from "react-bootstrap";
 import { SearchContext } from "../SearchContext";
+import AddWorkoutModal from "./AddWorkoutModal";
 
-const PeopleWorkouts = () => {
+const MemberWorkouts = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const { searchResults } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
-  const selectedUser = localStorage.getItem("selectedUser");
-  const selectedUserId = selectedUser ? JSON.parse(selectedUser).id : null;
-  const selectedUserName = selectedUser ? JSON.parse(selectedUser).user_name : null;
+  const selectedMember = localStorage.getItem("selectedMember")!;
+  const selectedUserId = selectedMember ? JSON.parse(selectedMember).id : null;
+  const selectedUserName = selectedMember ? JSON.parse(selectedMember).user_name : null;
   const { setWorkoutId } = useContext(WorkoutContext);
 
+  const fetchWorkouts = async () => {
+    setIsLoading(true);
+    const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
+      owner: selectedUserId,
+    });
+    setWorkouts(data.workoutsByOwner);
+    setIsLoading(false);
+  };
 
   useEffect(() => { 
-    const fetchWorkouts = async () => {
-      setIsLoading(true);
-      const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
-        owner: selectedUserId,
-      });
-      setWorkouts(data.workoutsByOwner);
-      setIsLoading(false);
-    };
     if (selectedUserId) {
       fetchWorkouts();
     }
@@ -38,11 +40,27 @@ const PeopleWorkouts = () => {
     setWorkouts(searchResults || []);
   }, [searchResults]);
 
+  const handleWorkoutAdded = () => {
+    fetchWorkouts();
+  };
+
   return (
     <div className="home">
-      <div className="headerDiv">
-        <h2 className="text-white mb-0">{selectedUserName}'s workouts</h2>
-      </div>
+      {selectedUserName === JSON.parse(localStorage.getItem("user")!).user_name ? (
+        <div className="header">
+          <div className="add-workout-button">
+          <AddWorkoutModal
+            show={showAddModal}
+            onHide={() => setShowAddModal(false)}
+            onWorkoutAdded={handleWorkoutAdded}
+          />
+          </div>
+        </div>
+      ) : (
+        <div className="headerDiv">
+          <h2 className="text-white mb-0">{selectedUserName}'s workouts</h2>
+        </div>
+      )}
       <div className="card-list">
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" />
@@ -86,7 +104,7 @@ const PeopleWorkouts = () => {
           ) : (
             <div className="mx-auto">
               <h2 className="mt-5 oswald-regular text-white">
-                This user is yet to create any workouts.
+                No workouts found.
               </h2>
             </div>
           ))}
@@ -95,4 +113,4 @@ const PeopleWorkouts = () => {
   );
 };
 
-export default PeopleWorkouts;
+export default MemberWorkouts;

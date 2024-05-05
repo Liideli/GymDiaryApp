@@ -159,7 +159,7 @@ const Exercise = () => {
           </div>
         ) : (
           <div className="mx-auto">
-            <h2 className="mt-5 oswald-regular text-white">No exercises in this workout.</h2>
+            <h2 className="mt-5 oswald-regular text-white">No exercises in this workout. Add them by clicking the plus button.</h2>
           </div>
         )}
       </div>
