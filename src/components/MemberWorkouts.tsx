@@ -20,6 +20,7 @@ const MemberWorkouts = () => {
   const [selectedWorkout, setSelectedWorkout] = useState<Workout>();
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
+  const token = localStorage.getItem("token")!;
   const selectedMember = localStorage.getItem("selectedMember")!;
   const selectedUserId = selectedMember ? JSON.parse(selectedMember).id : null;
   const selectedUserName = selectedMember
@@ -31,7 +32,7 @@ const MemberWorkouts = () => {
     setIsLoading(true);
     const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
       owner: selectedUserId,
-    });
+    }, token);
     setWorkouts(data.workoutsByOwner);
     setIsLoading(false);
   };

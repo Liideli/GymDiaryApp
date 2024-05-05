@@ -23,13 +23,14 @@ const Home = () => {
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
   const ownerId = owner ? JSON.parse(owner).id : null;
+  const token = localStorage.getItem("token")!;
   const { setWorkoutId } = useContext(WorkoutContext);
 
   const fetchWorkouts = async () => {
     setIsLoading(true);
     const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
       owner: ownerId,
-    });
+    }, token);
     setWorkouts(data.workoutsByOwner);
     setIsLoading(false);
   };
