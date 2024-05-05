@@ -61,6 +61,24 @@ h2 {
   background-color: #ffffff00;
 }
 
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-header {
+  background-color: #c6c6c6;
+  padding: 1em;
+  border-radius: 1em;
+  margin: 1em;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
 .login-register-container {
   margin-left: 14em;
   margin-right: 14em;
@@ -128,11 +146,17 @@ button.button-blue:hover {
     bottom: 3em;
     z-index: 9999;
   }
+  .group-header {
+    width: 100%;
+  }
 }
 
 @media (min-width: 992px) {
   .navbar-text {
     display: none;
+  }
+  .group-header {
+    width: 32em;
   }
 }
 

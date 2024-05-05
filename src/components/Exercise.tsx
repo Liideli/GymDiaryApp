@@ -73,7 +73,7 @@ const Exercise = () => {
       )}
       <div className="card-list">
         {isLoading ? (
-          <Spinner variant="white" animation="border" role="status" />
+          <Spinner variant="white" animation="border" role="status" className="mt-5" />
         ) : exercises.length > 0 ? (
           [...exercises].reverse().map((exercise) => (
             <Card

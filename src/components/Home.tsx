@@ -80,7 +80,7 @@ const Home = () => {
         />
       )}
         {isLoading ? (
-          <Spinner variant="white" animation="border" role="status" />
+          <Spinner variant="white" animation="border" role="status" className="mt-5" />
         ) : ownerId ? (
           workouts.length > 0 ? (
             [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((workout) => (

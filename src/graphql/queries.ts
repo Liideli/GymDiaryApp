@@ -129,4 +129,110 @@ mutation modifyExercise($modifyExerciseId: ID!, $input: ExerciseUpdateInput!) {
   }
 }`;
 
-export { login, register, getUsers, createWorkout, getWorkoutsByOwner, workoutBySearch, deleteWorkout, modifyWorkout, createExercise, getExercisesByWorkout, deleteExercise, modifyExercise};
+const createGroup = `
+mutation createGroup($input: GroupInput!) {
+  createGroup(input: $input) {
+    group {
+      id
+      name
+      description
+      owner {
+        id
+        user_name
+        email
+        workoutCount
+      }
+      members {
+        id
+        user_name
+        email
+        workoutCount
+      }
+    }
+    message
+  }
+}`;
+
+const getGroup = `
+query Group($groupId: ID!) {
+  group(id: $groupId) {
+    id
+    name
+    description
+    owner {
+      id
+      user_name
+      email
+      workoutCount
+    }
+    members {
+      id
+      user_name
+      email
+      workoutCount
+    }
+  }
+}`;
+
+const getGroups = `
+query GetGroups {
+  groups {
+    id
+    name
+    description
+    owner {
+      id
+      user_name
+      email
+      workoutCount
+    }
+    members {
+      id
+      user_name
+      email
+      workoutCount
+    }
+  }
+}`;
+
+const deleteGroup = `mutation DeleteGroup($deleteGroupId: ID!) {
+  deleteGroup(id: $deleteGroupId) {
+    group {
+      id
+      name
+      description
+      owner {
+        id
+        user_name
+        email
+        workoutCount
+      }
+      members {
+        id
+        user_name
+        email
+        workoutCount
+      }
+    }
+    message
+  }
+}`;
+
+export {
+  login,
+  register,
+  getUsers,
+  createWorkout,
+  getWorkoutsByOwner,
+  workoutBySearch,
+  deleteWorkout,
+  modifyWorkout,
+  createExercise,
+  getExercisesByWorkout,
+  deleteExercise,
+  modifyExercise,
+  createGroup,
+  getGroup,
+  getGroups,
+  deleteGroup,
+};

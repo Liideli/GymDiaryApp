@@ -25,7 +25,7 @@ function NavBar() {
 
   const handleLogout = () => {
     logout();
-    window.localStorage.removeItem("workoutId");
+    window.localStorage.clear();
   };
 
   // Function to add delay to reduce API calls on search input
@@ -80,8 +80,8 @@ function NavBar() {
               </Nav.Link>
             )}
             {user && (
-              <Nav.Link as={Link} to="/leaderboard">
-                Leaderboard
+              <Nav.Link as={Link} to="/groups">
+                Groups
               </Nav.Link>
             )}
             {location.pathname !== "/" ||

@@ -14,6 +14,8 @@ import { SearchContext } from './SearchContext';
 import { Workout } from './types/Workout';
 import People from './components/People';
 import PeopleWorkouts from './components/PeopleWorkouts';
+import Groups from './components/Groups';
+import GroupDetail from './components/GroupDetail';
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exercise/:id" element={<Exercise />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/group/:id" element={<GroupDetail />} />
           <Route path="/leaderboard" element={<People />} />
           <Route path="/leaderboardworkouts/:user_name" element={<PeopleWorkouts />} />
         </Routes>
