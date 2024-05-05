@@ -110,7 +110,7 @@ const MemberWorkouts = () => {
             />
           )}
         {isLoading ? (
-          <Spinner variant="white" animation="border" role="status" />
+          <Spinner variant="white" animation="border" role="status" className="mt-5" />
         ) : workouts.length > 0 ? (
           [...workouts]
             .sort(
