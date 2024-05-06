@@ -64,13 +64,13 @@ const Home = () => {
       case 0:
         return "#EF946C"; // Sunday
       case 1:
-        return "#FFB830"; // Monday
+        return "#6088D2"; // Monday
       case 2:
         return "#FF5733"; // Tuesday
       case 3:
-        return "#FFC300"; // Wednesday
+        return "#9E7ACD"; // Wednesday
       case 4:
-        return "#FF5733"; // Thursday
+        return "#A99A89"; // Thursday
       case 5:
         return "#FFC300"; // Friday
       case 6:
