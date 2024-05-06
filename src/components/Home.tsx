@@ -3,7 +3,7 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import AddWorkoutModal from "./AddWorkoutModal";
 import { useNavigate } from "react-router-dom";
 import { doGraphQLFetch } from "../graphql/fetch";
-import { getWorkoutsByOwner } from "../graphql/queries";
+import { getWorkoutsByUser } from "../graphql/queries";
 import { Workout } from "../types/Workout";
 import { WorkoutContext } from "../WorkoutContext";
 import { Spinner } from "react-bootstrap";
@@ -21,14 +21,14 @@ const Home = () => {
   const [selectedWorkout, setSelectedWorkout] = useState<Workout>();
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
-  const owner = localStorage.getItem("user")!;
-  const ownerId = owner ? JSON.parse(owner).id : null;
+  const user = localStorage.getItem("user")!;
+  const userId = user ? JSON.parse(user).id : null;
   const token = localStorage.getItem("token")!;
   const { setWorkoutId } = useContext(WorkoutContext);
 
   const fetchWorkouts = async () => {
-    const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
-      owner: ownerId,
+    const data = await doGraphQLFetch(apiURL, getWorkoutsByUser, {
+      user: userId,
     }, token);
     setWorkouts(data.workoutsByOwner);
     setIsLoading(false);
@@ -83,7 +83,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="header">
-        {ownerId && (
+        {userId && (
           <div className="add-workout-button">
           <AddWorkoutModal
             show={showAddModal}
@@ -105,8 +105,8 @@ const Home = () => {
       )}
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" className="mt-5" />
-        ) : ownerId && (
-          workouts.length > 0 ? (
+        ) : userId && (
+          workouts && workouts.length > 0 ? (
             [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((workout) => (
               <Card
                 className="custom-card card"

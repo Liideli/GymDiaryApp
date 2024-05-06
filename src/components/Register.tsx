@@ -42,7 +42,7 @@ const Register = () => {
 
   return (
     <Container className="login-register-container">
-      <h1 className="mt-5 oswald-regular text-white">Register</h1>
+      <h1 className="mt-5 oswald-regular text-white">Sign up</h1>
       <Form className="mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <FloatingLabel
@@ -77,7 +77,7 @@ const Register = () => {
         <div>
         <div>
           <Button className="button-blue w-100" type="submit">
-            Register
+            Sign up
           </Button>
         </div>
         <div className="mt-4">

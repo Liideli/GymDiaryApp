@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { FaUser } from "react-icons/fa";
+import { FaHome, FaUser, FaUserPlus } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { LiaDumbbellSolid } from "react-icons/lia";
 import { Form, FormControl, NavbarText } from "react-bootstrap";
@@ -12,6 +12,8 @@ import { doGraphQLFetch } from "../graphql/fetch";
 import { workoutBySearch } from "../graphql/queries";
 import { SearchContext } from "../SearchContext";
 import { useLocation } from "react-router-dom";
+import { FaUserGroup } from "react-icons/fa6";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 
 function NavBar() {
   const { user, logout } = useContext(UserContext);
@@ -50,7 +52,10 @@ function NavBar() {
   const debouncedHandleSearch = debounce(handleSearch, 300);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (navbarRef.current && !(navbarRef.current as HTMLElement).contains(event.target as Node)) {
+    if (
+      navbarRef.current &&
+      !(navbarRef.current as HTMLElement).contains(event.target as Node)
+    ) {
       setExpanded(false);
     }
   };
@@ -63,44 +68,78 @@ function NavBar() {
   }, []);
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" sticky="top" expanded={expanded} ref={navbarRef}>
+    <Navbar
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      sticky="top"
+      expanded={expanded}
+      ref={navbarRef}
+    >
       <Container>
         <NavbarText className="navbar-back-button">
-          <IoIosArrowBack size= "2em" onClick={() => navigate(-1)} />
+          <IoIosArrowBack size="2em" onClick={() => navigate(-1)} />
         </NavbarText>
         <Navbar.Brand href="/~roopekl/gymdiary/" className="oswald-semibold">
           <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
           GymDiary
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => setExpanded(!expanded)}
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user && (
               <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
-                Home
+                <FaHome size="1.2em" style={{ marginRight: "10px" }} />
+                Your Workouts
               </Nav.Link>
             )}
             {!user ? (
               <>
-                <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)}>
+                <Nav.Link
+                  as={Link}
+                  to="/login"
+                  onClick={() => setExpanded(false)}
+                >
+                  <FiLogIn size="1.2em" style={{ marginRight: "10px" }} />
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/register" onClick={() => setExpanded(false)}>
-                  Register
+                <Nav.Link
+                  as={Link}
+                  to="/register"
+                  onClick={() => setExpanded(false)}
+                >
+                  <FaUserPlus size="1.2em" style={{ marginRight: "10px" }} />
+                  New Account
                 </Nav.Link>
               </>
             ) : (
-              <Nav.Link onClick={() => {handleLogout(); setExpanded(false)}} as={Link} to="/login">
+              <Nav.Link
+                onClick={() => {
+                  handleLogout();
+                  setExpanded(false);
+                }}
+                as={Link}
+                to="/login"
+              >
+                <FiLogOut size="1.2em" style={{ marginRight: "10px" }} />
                 Logout
               </Nav.Link>
             )}
             {user && (
-              <Nav.Link as={Link} to="/groups" onClick={() => setExpanded(false)}>
+              <Nav.Link
+                as={Link}
+                to="/groups"
+                onClick={() => setExpanded(false)}
+              >
+                <FaUserGroup size="1.2em" style={{ marginRight: "10px" }} />
                 Groups
               </Nav.Link>
             )}
             {location.pathname !== "/" ||
-              ownerId && (
+              (ownerId && (
                 <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
                   <FormControl
                     type="search"
@@ -113,7 +152,7 @@ function NavBar() {
                     }}
                   />
                 </Form>
-              )}
+              ))}
           </Nav>
           {user && (
             <Navbar.Text className="ml-auto">

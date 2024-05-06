@@ -45,6 +45,21 @@ mutation CreateWorkout($input: WorkoutInput!) {
   }
 }`;
 
+const getWorkoutsByUser = `query WorkoutsByUser($user: ID!) {
+  workoutsByUser(user: $user) {
+    id
+    title
+    description
+    date
+    owner {
+      id
+      user_name
+      email
+      workoutCount
+    }
+  }
+}`;
+
 const getWorkoutsByOwner = `query WorkoutsByOwner($owner: ID!) {
   workoutsByOwner(owner: $owner) {
     description
@@ -271,6 +286,7 @@ export {
   register,
   getUsers,
   createWorkout,
+  getWorkoutsByUser,
   getWorkoutsByOwner,
   workoutBySearch,
   deleteWorkout,
