@@ -81,8 +81,7 @@ h2 {
 }
 
 .login-register-container {
-  margin-left: 14em;
-  margin-right: 14em;
+  width: 33.333% !important; 
 }
 
 button.button-blue {
@@ -131,10 +130,7 @@ button.button-blue:hover {
   .card-wrapper {
     flex-basis: calc(33.333% - 1rem);
   }
-  .login-register-container {
-    margin-left: 4em;
-    margin-right: 4em;
-  }
+  
   .header {
     height: 0;
     padding: 0;
@@ -167,6 +163,9 @@ button.button-blue:hover {
 @media (max-width: 768px) {
   .card-wrapper {
     flex-basis: calc(50% - 1rem);
+  }
+  .login-register-container {
+    width: 80% !important;
   }
 }
 

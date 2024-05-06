@@ -41,9 +41,9 @@ const Register = () => {
   };
 
   return (
-    <Container className="w-75">
+    <Container className="login-register-container">
       <h1 className="mt-5 oswald-regular text-white">Register</h1>
-      <Form className="login-register-container mt-3" onSubmit={handleSubmit}>
+      <Form className="mt-3" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <FloatingLabel
         controlId="floatingInputUsername"
@@ -74,9 +74,23 @@ const Register = () => {
           </FloatingLabel>
         </Form.Group>
         
-        <Button className="button-blue" type="submit">
-          Register
-        </Button>
+        <div>
+        <div>
+          <Button className="button-blue w-100" type="submit">
+            Register
+          </Button>
+        </div>
+        <div className="mt-4">
+          <Button
+            className="w-100"
+            variant="outline-secondary"
+            type="button"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </Button>
+        </div>
+        </div>
       </Form>
     </Container>
   );

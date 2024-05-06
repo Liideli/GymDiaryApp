@@ -12,7 +12,7 @@ import ConfirmationModal from "./ConfirmationModal";
 const GroupDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [group, setGroup] = useState<Group | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [, setSelectedUser] = useState<User>();
   const [showModal, setShowModal] = useState(false);
   const [modalAction, setModalAction] = useState("join");
@@ -23,11 +23,10 @@ const GroupDetail = () => {
   const token = localStorage.getItem("token")!;
 
   const fetchGroup = async () => {
-    setLoading(true);
-    const data = await doGraphQLFetch(apiURL, getGroup, { groupId: id });
-    setGroup(data.group);
-    setLoading(false);
-    checkMembership(data.group);
+      const data = await doGraphQLFetch(apiURL, getGroup, { groupId: id }, token);
+      setGroup(data.group);
+      setLoading(false);
+      checkMembership(data.group);
   };
 
   const checkMembership = (group: Group) => {
@@ -64,9 +63,12 @@ const GroupDetail = () => {
     }
     setShowModal(false);
   };
-
   useEffect(() => {
-    fetchGroup();
+    if (token) {
+      fetchGroup();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   if (loading) {

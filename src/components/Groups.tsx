@@ -8,26 +8,33 @@ import { useNavigate } from "react-router-dom";
 
 const Groups = () => {
   const [groups, setGroups] = useState<Groups[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
   const [, setSelectedGroupId] = useState<string>();
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
+  const token = localStorage.getItem("token")!;
   const owner = localStorage.getItem("user")!;
   const ownerId = owner ? JSON.parse(owner).id : null;
 
   const fetchGroups = async () => {
-    setLoading(true);
-    const data = await doGraphQLFetch(apiURL, getGroups, {
-      owner: ownerId,
-    });
+    const data = await doGraphQLFetch(
+      apiURL,
+      getGroups,
+      {
+        owner: ownerId,
+      },
+      token
+    );
     setGroups(data.groups);
     setLoading(false);
   };
 
   useEffect(() => {
-    if (ownerId) {
+    if (token) {
       fetchGroups();
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -56,7 +63,7 @@ const Groups = () => {
             role="status"
             className="mt-5"
           />
-        ) : ownerId ? (
+        ) : ownerId && (
           groups.length > 0 ? (
             groups
               .sort(
@@ -83,7 +90,7 @@ const Groups = () => {
                     <ListGroup variant="flush">
                       <ListGroup.Item>
                         <div className="group-name-container">
-                        <h4>{group.name}</h4>
+                          <h4>{group.name}</h4>
                         </div>
                       </ListGroup.Item>
                       {group.description && (
@@ -101,12 +108,6 @@ const Groups = () => {
               <h2 className="mt-5 oswald-regular text-white">Add Groups</h2>
             </div>
           )
-        ) : (
-          <div className="mx-auto">
-            <h2 className="mt-5 oswald-regular text-white">
-              Please login or register to create groups.
-            </h2>
-          </div>
         )}
       </div>
     </div>

@@ -11,7 +11,7 @@ import { Spinner } from "react-bootstrap";
 const Exercise = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<ExerciseType>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [exercises, setExercises] = useState<ExerciseType[]>([]);
   const apiURL = import.meta.env.VITE_API_URL;
   const owner = localStorage.getItem("user")!;
@@ -23,7 +23,6 @@ const Exercise = () => {
   const workoutId = contextWorkout.workoutId || savedWorkoutId;
 
   const fetchExercises = async () => {
-    setIsLoading(true);
     const data = await doGraphQLFetch(apiURL, getExercisesByWorkout, {
       workout: workoutId,
     });

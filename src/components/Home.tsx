@@ -15,7 +15,7 @@ import { SearchContext } from "../SearchContext";
 const Home = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const { searchResults } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showModifyModal, setShowModifyModal] = useState(false);
   const [selectedWorkout, setSelectedWorkout] = useState<Workout>();
@@ -27,7 +27,6 @@ const Home = () => {
   const { setWorkoutId } = useContext(WorkoutContext);
 
   const fetchWorkouts = async () => {
-    setIsLoading(true);
     const data = await doGraphQLFetch(apiURL, getWorkoutsByOwner, {
       owner: ownerId,
     }, token);
@@ -36,8 +35,11 @@ const Home = () => {
   };
 
   useEffect(() => { 
-    if (ownerId) {
+    if (token) {
       fetchWorkouts();
+    }
+    else {
+      navigate("/login");
     }
   }, []);
 
@@ -56,13 +58,6 @@ const Home = () => {
   const handleWorkoutDeleted = () => {
     fetchWorkouts();
   };
-
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (!user) {
-      navigate('/login');
-    }
-  }, []);
 
   const getColorForDay = (date: Date) => {
     switch (date.getDay()) {
@@ -110,7 +105,7 @@ const Home = () => {
       )}
         {isLoading ? (
           <Spinner variant="white" animation="border" role="status" className="mt-5" />
-        ) : ownerId ? (
+        ) : ownerId && (
           workouts.length > 0 ? (
             [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((workout) => (
               <Card
@@ -173,12 +168,6 @@ const Home = () => {
               </h2>
             </div>
           )
-        ) : (
-          <div className="mx-auto">
-            <h2 className="m-5 oswald-regular text-white">
-              Please login or register to mark down workouts.
-            </h2>
-          </div>
         )}
       </div>
     </div>
