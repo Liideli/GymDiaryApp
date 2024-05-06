@@ -7,6 +7,7 @@ import WorkoutContext from "../WorkoutContext";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PlusMinusInput from "./PlusMinusInput";
 
 const AddExerciseModal = ({
   onExerciseAdded,
@@ -18,10 +19,10 @@ const AddExerciseModal = ({
   const [show, setShow] = useState(false);
   const [exerciseName, setExerciseName] = useState("");
   const [description, setDescription] = useState("");
-  const [weight, setWeight] = useState("");
-  const [sets, setSets] = useState("");
-  const [reps, setReps] = useState("");
-  const [duration, setDuration] = useState("");
+  const [weight, setWeight] = useState(0);
+  const [sets, setSets] = useState(0);
+  const [reps, setReps] = useState(0);
+  const [duration, setDuration] = useState(0);
   const apiURL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token")!;
   const contextWorkoutId = useContext(WorkoutContext);
@@ -49,10 +50,10 @@ const AddExerciseModal = ({
             workout: workoutId,
             name: exerciseName,
             description: description,
-            weight: parseFloat(weight),
-            sets: parseInt(sets),
-            reps: parseInt(reps),
-            duration: parseInt(duration),
+            weight: parseFloat(Number(weight).toFixed(1)),
+            sets: parseInt(String(sets)),
+            reps: parseInt(String(reps)),
+            duration: duration ? parseInt(String(duration)) : 0,
           },
         },
         token
@@ -62,6 +63,7 @@ const AddExerciseModal = ({
     } catch (error) {
       console.error(error);
     }
+    console.log("token", token);
     setShow(false);
     setValidated(false);
   };
@@ -102,7 +104,7 @@ const AddExerciseModal = ({
               <Form.Label>Description:</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={3}
+                rows={2}
                 placeholder="Enter description (optional)"
                 value={description}
                 maxLength={100}
@@ -112,41 +114,41 @@ const AddExerciseModal = ({
 
             <Form.Group controlId="formWeight">
               <Form.Label>Weight:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter weight"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+              <PlusMinusInput
+                value={weight.toString()}
+                onChange={(value: string) => setWeight(parseFloat(value))}
               />
             </Form.Group>
 
             <Form.Group controlId="formSets">
               <Form.Label>Sets:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter sets"
-                value={sets}
-                onChange={(e) => setSets(e.target.value)}
+              <PlusMinusInput
+                value={sets.toString()}
+                onChange={(value: string) => setSets(parseFloat(value))}
               />
             </Form.Group>
 
             <Form.Group controlId="formReps">
               <Form.Label>Reps:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter reps"
-                value={reps}
-                onChange={(e) => setReps(e.target.value)}
+              <PlusMinusInput
+                value={reps.toString()}
+                onChange={(value: string) => setReps(parseFloat(value))}
               />
             </Form.Group>
 
             <Form.Group controlId="formDuration">
-              <Form.Label>Duration:</Form.Label>
+              <Form.Label>Duration (minutes):</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter duration"
+                placeholder="Enter duration (minutes)"
                 value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                onChange={(e) => {
+                  let inputValue = parseInt(e.target.value);
+                  if (isNaN(inputValue) || inputValue < 0) {
+                    inputValue = 0;
+                  }
+                  setDuration(inputValue);
+                }}
               />
             </Form.Group>
           </Form>

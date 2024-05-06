@@ -21,9 +21,7 @@ const Groups = () => {
     const data = await doGraphQLFetch(
       apiURL,
       getGroups,
-      {
-        owner: ownerId,
-      },
+      { owner: ownerId },
       token
     );
     setGroups(data.groups);

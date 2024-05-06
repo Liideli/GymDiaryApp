@@ -91,7 +91,7 @@ const ModifyWorkoutModal = ({
     <>
     <Modal centered show={show} onHide={onHide} style={{ zIndex: 10000 }}>
       <Modal.Header closeButton>
-        <Modal.Title>Modify Workout</Modal.Title>
+        <Modal.Title>Modify workout: {workout.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form noValidate validated={validated}>

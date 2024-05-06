@@ -112,7 +112,7 @@ const Exercise = () => {
                         borderColor: "#303030",
                       }}
                     >
-                      <strong>Duration:</strong> {exercise.duration} seconds
+                      <strong>Duration:</strong> {exercise.duration} minutes
                     </ListGroup.Item>
                   )}
                   {exercise.reps !== 0 && exercise.reps !== null && (

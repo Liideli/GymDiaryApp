@@ -6,6 +6,7 @@ import { ExerciseUpdateInput } from "../types/Exercise";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PlusMinusInput from "./PlusMinusInput";
 
 const ModifyExerciseModal = ({
   show,
@@ -102,7 +103,7 @@ const ModifyExerciseModal = ({
   return (
     <Modal centered show={show} onHide={handleClose} style={{ zIndex: 10000 }}>
       <Modal.Header closeButton>
-        <Modal.Title>Modify Exercise</Modal.Title>
+        <Modal.Title>Modify exercise: {selectedExercise.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleModifyExercise} noValidate validated={validated}>
@@ -122,44 +123,44 @@ const ModifyExerciseModal = ({
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={2}
+              placeholder="Enter description (optional)"
               value={description}
               maxLength={100}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Sets</Form.Label>
-            <Form.Control
-              type="number"
-              value={sets}
-              onChange={(e) => setSets(Number(e.target.value))}
-            />
+          <Form.Group controlId="formWeight">
+            <Form.Label>Weight:</Form.Label>
+            <PlusMinusInput value={weight.toString()} onChange={(value: string) => setWeight(parseFloat(value))} />
+          </Form.Group>
+
+            <Form.Group controlId="formSets">
+              <Form.Label>Sets:</Form.Label>
+              <PlusMinusInput value={sets.toString()} onChange={(value: string) => setSets(parseFloat(value))} />
+            </Form.Group>
+
+            <Form.Group controlId="formReps">
+              <Form.Label>Reps:</Form.Label>
+              <PlusMinusInput value={reps.toString()} onChange={(value: string) => setReps(parseFloat(value))} />
+            </Form.Group>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Reps</Form.Label>
+            <Form.Label>Duration {"(minutes)"}</Form.Label>
             <Form.Control
-              type="number"
-              value={reps}
-              onChange={(e) => setReps(Number(e.target.value))}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Weight</Form.Label>
-            <Form.Control
-              type="number"
-              step="0.1"
-              value={weight}
-              onChange={(e) => setWeight(Number(e.target.value))}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Duration {"(seconds)"}</Form.Label>
-            <Form.Control
-              type="number"
-              value={duration}
-              onChange={(e) => setDuration(Number(e.target.value))}
-            />
+                type="text"
+                placeholder="Enter duration (minutes)"
+                value={duration}
+                onChange={(e) => {
+                  let inputValue = parseInt(e.target.value);
+                  if (isNaN(inputValue) || inputValue < 0) {
+                    inputValue = 0;
+                  }
+                  setDuration(inputValue);
+                }}
+              />
           </Form.Group>
         </Form>
       </Modal.Body>
