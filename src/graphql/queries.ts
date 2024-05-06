@@ -45,8 +45,8 @@ mutation CreateWorkout($input: WorkoutInput!) {
   }
 }`;
 
-const getWorkoutsByUser = `query WorkoutsByUser($user: ID!) {
-  workoutsByUser(user: $user) {
+const getWorkoutsByUser = `query WorkoutsByUser($owner: ID!) {
+  workoutsByUser(owner: $owner) {
     id
     title
     description

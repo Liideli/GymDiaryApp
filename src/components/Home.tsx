@@ -26,11 +26,12 @@ const Home = () => {
   const token = localStorage.getItem("token")!;
   const { setWorkoutId } = useContext(WorkoutContext);
 
+
   const fetchWorkouts = async () => {
     const data = await doGraphQLFetch(apiURL, getWorkoutsByUser, {
-      user: userId,
+      owner: userId,
     }, token);
-    setWorkouts(data.workoutsByOwner);
+    setWorkouts(data.workoutsByUser);
     setIsLoading(false);
   };
 
