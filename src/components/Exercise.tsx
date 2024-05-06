@@ -154,7 +154,7 @@ const Exercise = () => {
           ))
         ) : ownerId === savedWorkout.owner.id ? (
           <div className="mx-auto">
-            <h2 className="m-5 oswald-regular text-white">No Exercises</h2>
+            <h2 className="m-5 oswald-regular text-white">No Exercises. Add one by clicking the plus button.</h2>
           </div>
         ) : (
           <div className="mx-auto">
