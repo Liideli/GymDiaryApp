@@ -17,12 +17,12 @@ The initial idea of GymDiary was to make an application that is designed to be s
 ## Screenshots
 
 <p align="center">
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-login.png" alt="login" width="100"/>
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-register.png" alt="register" width="100"/>
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-workouts.png" alt="workouts" width="100"/>
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-exercises.png" alt="exercises" width="100"/>
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-groups.png" alt="groups" width="100"/>
-   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-group.png" alt="group" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-login.png" alt="login" width="120"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-register.png" alt="register" width="120"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-workouts.png" alt="workouts" width="120"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-exercises.png" alt="exercises" width="120"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-groups.png" alt="groups" width="120"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-group.png" alt="group" width="120"/>
 </p>
 
 ## Installation
