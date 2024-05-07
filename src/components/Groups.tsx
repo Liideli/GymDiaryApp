@@ -93,11 +93,9 @@ const Groups = () => {
                           <h4>{group.name}</h4>
                         </div>
                       </ListGroup.Item>
-                      {group.description && (
-                        <ListGroup.Item>{group.description}</ListGroup.Item>
-                      )}
+                      <ListGroup.Item>By: {group.owner.user_name}</ListGroup.Item>
                       <ListGroup.Item>
-                        {group.members && group.members.length} members
+                        <strong><Card.Text>{group.members.length} {group.members.length === 1 ? 'member' : 'members'}</Card.Text></strong>
                       </ListGroup.Item>
                     </ListGroup>
                   </Card.Body>

@@ -1,9 +1,11 @@
+import { User } from "./User";
+
 type Groups = {
     id?: string;
     name?: string;
     description?: string;
-    owner?: string;
-    members?: string;
+    owner: User;
+    members: string;
 }
 
 type GroupInput = {
