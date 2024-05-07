@@ -141,7 +141,7 @@ function NavBar() {
             showSearchBar || windowWidth > 768 ? "open" : ""
           }`}
         >
-          {location.pathname !== "/" || user ? (
+          {location.pathname === "/" && user ? (
             <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
               <FormControl
               size="sm"

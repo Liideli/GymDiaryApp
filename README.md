@@ -25,6 +25,9 @@ The initial idea of GymDiary was to make an application that is designed to be s
    <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-group.png" alt="group" width="120"/>
 </p>
 
+## Test Application Here
+[https://users.metropolia.fi/~roopekl/gymdiary/](https://users.metropolia.fi/~roopekl/gymdiary/)
+
 ## Installation
 
 To get started with GymDiary client, follow these steps:
