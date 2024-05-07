@@ -5,6 +5,7 @@ import { doGraphQLFetch } from "../graphql/fetch";
 import type { Groups } from "../types/Groups";
 import CreateGroupModal from "./CreateGroupModal";
 import { useNavigate } from "react-router-dom";
+import { FaUserGroup } from "react-icons/fa6";
 
 const Groups = () => {
   const [groups, setGroups] = useState<Groups[]>([]);
@@ -88,6 +89,7 @@ const Groups = () => {
                     <ListGroup variant="flush">
                       <ListGroup.Item>
                         <div className="group-name-container">
+                          <FaUserGroup size="1.2em" style={{ marginRight: "10px" }} />
                           <h4>{group.name}</h4>
                         </div>
                       </ListGroup.Item>

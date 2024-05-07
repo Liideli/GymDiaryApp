@@ -124,7 +124,7 @@ const GroupDetail = () => {
           {group && group.owner.id === currentUserId && (
             <div className="header-settings">
               <Button size="sm" variant="secondary" onClick={handleDeleteGroup}>
-                <FaGear />
+                <FaGear size="1.2em" />
               </Button>
               <div style={{ width: "2em" }}> </div>
             </div>

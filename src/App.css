@@ -102,6 +102,7 @@ button.button-blue:hover {
 }
 
 .custom-card {
+  height: 20em;
   max-width: 300px;
   transition: border-radius 0.1s ease-out
 }
@@ -224,13 +225,17 @@ button.button-blue:hover {
 }
 
 .group-name-container {
-  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
   padding: 1em;
   background-color: #D1FAFF;
+  text-align: start;
 }
 
 .header-settings {
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
