@@ -228,3 +228,11 @@ button.button-blue:hover {
   padding: 1em;
   background-color: #D1FAFF;
 }
+
+.header-settings {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff00;
+}
