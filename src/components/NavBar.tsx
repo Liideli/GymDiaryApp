@@ -130,7 +130,7 @@ function NavBar() {
                 <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
                   <FormControl
                     type="search"
-                    placeholder="Search workouts"
+                    placeholder="search workouts"
                     aria-label="Search"
                     value={searchTerm}
                     style={{ borderRadius: "2em" }}
