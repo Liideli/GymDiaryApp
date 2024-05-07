@@ -107,7 +107,7 @@ function NavBar() {
             GymDiary
           </Navbar.Brand>
           <div style={{ width: "30%" }}>
-            {user && (
+            {user && location.pathname === "/" && (
               <NavbarText className="navbar-back-button">
                 <FaSearch
                   size="1.5em"
