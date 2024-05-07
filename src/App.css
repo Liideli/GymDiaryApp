@@ -154,7 +154,7 @@ button.button-blue:hover {
     border-radius: 2em;
     position: fixed;
     right: 2em;
-    bottom: 3em;
+    bottom: 2em;
     z-index: 9999;
   }
   .group-header {

@@ -11,7 +11,19 @@ The initial idea of GymDiary was to make an application that is designed to be s
 - **User Authentication**: Securely create an account and log in to GymDiary to access all features.
 - **Workout Logging**: Log your workouts with details such as name, description, date.
 - **Exercise Logging**: Log your exercises with details such as name, description, sets, reps, weight, duration.
+- **Training Groups**: Create groups to share workouts and exercises with other users.
 - **Responsive Design**: Access GymDiary from any device, including smartphones, tablets, and desktop computers.
+
+## Screenshots
+
+<p align="center">
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-login.png" alt="login" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-register.png" alt="register" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-workouts.png" alt="workouts" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-exercises.png" alt="exercises" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-groups.png" alt="groups" width="100"/>
+   <img src="https://github.com/Liideli/GymDiaryApp/blob/main/public/gymdiary-group.png" alt="group" width="100"/>
+</p>
 
 ## Installation
 
@@ -20,12 +32,13 @@ To get started with GymDiary client, follow these steps:
 1. Clone this repository to your local machine.
 2. Install dependencies by running `npm install`.
 4. Configure environment variables for authentication, database connection, etc.
+  - VITE_API_URL="your-backend-url"
 5. Start the development server with `npm run dev`.
 
 
 ## The Backend
 
-The GymDiary backend is available at [https://github.com/Liideli/GymDiary-backend](https://github.com/Liideli/GymDiary-backend).
+The GymDiary backend code is available at [https://github.com/Liideli/GymDiary-backend](https://github.com/Liideli/GymDiary-backend).
 
 ## License
 
