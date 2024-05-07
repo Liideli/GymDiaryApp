@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { FaHome, FaUser, FaUserPlus } from "react-icons/fa";
+import { FaHome, FaSearch, FaUser, FaUserPlus } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { LiaDumbbellSolid } from "react-icons/lia";
 import { Form, FormControl, NavbarText } from "react-bootstrap";
@@ -19,6 +19,7 @@ function NavBar() {
   const { user, logout } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [expanded, setExpanded] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
   const navbarRef = useRef(null);
   const { setSearchResults } = useContext(SearchContext);
   const apiURL = import.meta.env.VITE_API_URL;
@@ -67,6 +68,20 @@ function NavBar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (user) {
+        setShowSearchBar(window.innerWidth > 992);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Navbar
       expand="lg"
@@ -77,22 +92,65 @@ function NavBar() {
       ref={navbarRef}
     >
       <Container>
-        <NavbarText className="navbar-back-button">
-          <IoIosArrowBack size="2em" onClick={() => navigate(-1)} />
-        </NavbarText>
-        <Navbar.Brand href="/~roopekl/gymdiary/" className="oswald-semibold">
-          <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
-          GymDiary
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => setExpanded(!expanded)}
-        />
+        <div className="navbar-container">
+          <NavbarText
+            className="navbar-back-button"
+            style={{ width: "70%", textAlign: "left" }}
+          >
+            <IoIosArrowBack size="2em" onClick={() => navigate(-1)} />
+          </NavbarText>
+          <Navbar.Brand
+            href="/~roopekl/gymdiary/"
+            className="oswald-semibold navbar-brand"
+          >
+            <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
+            GymDiary
+          </Navbar.Brand>
+          <div style={{ width: "30%" }}>
+            {user && (
+              <NavbarText className="navbar-back-button">
+                <FaSearch
+                  size="1.5em"
+                  style={{ marginRight: "1.2em" }}
+                  aria-controls="search-bar"
+                  onClick={() => setShowSearchBar(!showSearchBar)}
+                />
+              </NavbarText>
+            )}
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={() => setExpanded(!expanded)}
+            />
+          </div>
+        </div>
+        <div className="search-bar">
+          {showSearchBar || window.innerWidth > 768
+            ? location.pathname !== "/" ||
+              (user && (
+                <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+                  <FormControl
+                    type="search"
+                    placeholder="Search workouts"
+                    aria-label="Search"
+                    value={searchTerm}
+                    style={{ borderRadius: "2em" }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setSearchTerm(e.target.value);
+                      debouncedHandleSearch(e.target.value);
+                    }}
+                  />
+                </Form>
+              ))
+            : null}
+        </div>
+        <div style={{width: "144em"}}> </div>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user && (
               <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
+                {window.innerWidth <= 768 && (
                 <FaHome size="1.2em" style={{ marginRight: "10px" }} />
+                )}
                 Your Workouts
               </Nav.Link>
             )}
@@ -103,7 +161,9 @@ function NavBar() {
                   to="/login"
                   onClick={() => setExpanded(false)}
                 >
+                  {window.innerWidth <= 768 && (
                   <FiLogIn size="1.2em" style={{ marginRight: "10px" }} />
+                  )}
                   Login
                 </Nav.Link>
                 <Nav.Link
@@ -111,11 +171,23 @@ function NavBar() {
                   to="/register"
                   onClick={() => setExpanded(false)}
                 >
+                  {window.innerWidth <= 768 && (
                   <FaUserPlus size="1.2em" style={{ marginRight: "10px" }} />
+                  )}
                   New Account
                 </Nav.Link>
+
               </>
             ) : (
+              <>
+                <Nav.Link
+                  as={Link}
+                  to="/groups"
+                  onClick={() => setExpanded(false)}
+                >
+                  <FaUserGroup size="1.2em" style={{ marginRight: "10px" }} />
+                  Groups
+                </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   handleLogout();
@@ -127,32 +199,8 @@ function NavBar() {
                 <FiLogOut size="1.2em" style={{ marginRight: "10px" }} />
                 Logout
               </Nav.Link>
+              </>
             )}
-            {user && (
-              <Nav.Link
-                as={Link}
-                to="/groups"
-                onClick={() => setExpanded(false)}
-              >
-                <FaUserGroup size="1.2em" style={{ marginRight: "10px" }} />
-                Groups
-              </Nav.Link>
-            )}
-            {location.pathname !== "/" ||
-              (ownerId && (
-                <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
-                  <FormControl
-                    type="search"
-                    placeholder="Search workouts"
-                    aria-label="Search"
-                    value={searchTerm}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setSearchTerm(e.target.value);
-                      debouncedHandleSearch(e.target.value);
-                    }}
-                  />
-                </Form>
-              ))}
           </Nav>
           {user && (
             <Navbar.Text className="ml-auto">

@@ -126,6 +126,19 @@ button.button-blue:hover {
   margin-bottom: 1rem;
 }
 
+.navbar-brand {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  padding-right: 1em;
+  padding-top: 0.4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .card-wrapper {
@@ -159,6 +172,23 @@ button.button-blue:hover {
   .group-header {
     width: 32em;
   }
+  .navbar-container {
+    width: 0;
+  }
+  .nav-link {
+    width: 7em;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .navbar-text {
+    width: 9em;
+  }
+  .div-container {
+    margin: 0;
+  }
+  .navbar-brand {
+    position: relative;
+  }
 }
 
 @media (max-width: 768px) {
@@ -168,11 +198,20 @@ button.button-blue:hover {
   .login-register-container {
     width: 80% !important;
   }
+  .search-bar {
+    border-radius: 0.5em;
+    border-color: #D1FAFF;
+  }
 }
 
 @media (max-width: 576px) {
   .card-wrapper {
     flex-basis: calc(100% - 1rem);
+  }
+  .search-bar {
+    width: 100%;
+    border-radius: 0.5em;
+    border-color: #D1FAFF;
   }
 }
 
@@ -240,4 +279,23 @@ button.button-blue:hover {
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff00;
+}
+
+.navbar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff00;
+  border-radius: 0.5em;
+}
+
+.search-bar {
+  width: 128em;
+  border-radius: 0.5em;
+  border-color: #D1FAFF;
+}
+
+.search-icon {
+  color: #fff
 }

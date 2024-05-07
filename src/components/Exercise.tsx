@@ -72,7 +72,12 @@ const Exercise = () => {
       )}
       <div className="card-list">
         {isLoading ? (
-          <Spinner variant="white" animation="border" role="status" className="mt-5" />
+          <Spinner
+            variant="white"
+            animation="border"
+            role="status"
+            className="mt-5"
+          />
         ) : exercises.length > 0 ? (
           [...exercises].reverse().map((exercise) => (
             <Card
@@ -104,26 +109,15 @@ const Exercise = () => {
                       {exercise.description}
                     </ListGroup.Item>
                   )}
-                  {exercise.duration !== 0 && exercise.duration !== null && (
+                  {exercise.weight !== 0 && exercise.weight !== null && (
                     <ListGroup.Item
                       style={{
                         textAlign: "left",
-                        backgroundColor: "#ECEF80",
+                        backgroundColor: "#ECEF8000",
                         borderColor: "#303030",
                       }}
                     >
-                      <strong>Duration:</strong> {exercise.duration} minutes
-                    </ListGroup.Item>
-                  )}
-                  {exercise.reps !== 0 && exercise.reps !== null && (
-                    <ListGroup.Item
-                      style={{
-                        textAlign: "left",
-                        backgroundColor: "#ECEF80",
-                        borderColor: "#303030",
-                      }}
-                    >
-                      <strong>Reps:</strong> {exercise.reps}
+                      <strong>Weight:</strong> {exercise.weight} kg
                     </ListGroup.Item>
                   )}
                   {exercise.sets !== 0 && exercise.sets !== null && (
@@ -137,15 +131,26 @@ const Exercise = () => {
                       <strong>Sets:</strong> {exercise.sets}
                     </ListGroup.Item>
                   )}
-                  {exercise.weight !== 0 && exercise.weight !== null && (
+                  {exercise.reps !== 0 && exercise.reps !== null && (
                     <ListGroup.Item
                       style={{
                         textAlign: "left",
-                        backgroundColor: "#ECEF8000",
+                        backgroundColor: "#ECEF80",
                         borderColor: "#303030",
                       }}
                     >
-                      <strong>Weight:</strong> {exercise.weight} kg
+                      <strong>Reps:</strong> {exercise.reps}
+                    </ListGroup.Item>
+                  )}
+                  {exercise.duration !== 0 && exercise.duration !== null && (
+                    <ListGroup.Item
+                      style={{
+                        textAlign: "left",
+                        backgroundColor: "#ECEF80",
+                        borderColor: "#303030",
+                      }}
+                    >
+                      <strong>Duration:</strong> {exercise.duration} minutes
                     </ListGroup.Item>
                   )}
                 </ListGroup>
@@ -154,11 +159,15 @@ const Exercise = () => {
           ))
         ) : ownerId === savedWorkout.owner.id ? (
           <div className="mx-auto">
-            <h2 className="m-5 oswald-regular text-white">No Exercises. Add one by clicking the plus button.</h2>
+            <h2 className="m-5 oswald-regular text-white">
+              No Exercises. Add one by clicking the plus button.
+            </h2>
           </div>
         ) : (
           <div className="mx-auto">
-            <h2 className="m-5 oswald-regular text-white">No exercises in this workout.</h2>
+            <h2 className="m-5 oswald-regular text-white">
+              No exercises in this workout.
+            </h2>
           </div>
         )}
       </div>
