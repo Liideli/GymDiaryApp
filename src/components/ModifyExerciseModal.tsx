@@ -124,7 +124,7 @@ const ModifyExerciseModal = ({
             <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
-              rows={2}
+              rows={1}
               placeholder="Enter description (optional)"
               value={description}
               maxLength={100}

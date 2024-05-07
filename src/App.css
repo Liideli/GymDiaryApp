@@ -9,9 +9,9 @@ html {
 
 body {
   background-image: url('./assets/dumbell-svgrepo-com.svg');
-  background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100em;
+  background-size: 20em;
+  background-blend-mode: hard-light;
   background-position: top;
   background-color: #303030;
 }
@@ -293,10 +293,17 @@ button.button-blue:hover {
   border-radius: 0.5em;
 }
 
+.search-bar.open {
+  max-height: 100px;
+}
+
 .search-bar {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
   width: 128em;
   border-radius: 0.5em;
-  border-color: #D1FAFF;
+  border-color: #F2F2F2;;
 }
 
 .search-icon {

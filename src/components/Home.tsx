@@ -112,7 +112,7 @@ const Home = () => {
               <Card
                 className="custom-card card"
                 key={workout.id}
-                style={{ flex: "1 1 50%", margin: "10px" }}
+                style={{ flex: "1 1 50%", margin: "10px", backgroundColor: "#F2F2F2" }}
                 onClick={() => {
                   setWorkoutId(workout.id);
                   localStorage.setItem("workout", JSON.stringify(workout));
@@ -141,7 +141,7 @@ const Home = () => {
                     {workout.description && (
                       <ListGroup.Item>{workout.description}</ListGroup.Item>
                     )}
-                    <ListGroup.Item>
+                    <ListGroup.Item style={{ padding: "0" }}>
                       <div
                         style={{
                           backgroundColor: getColorForDay(

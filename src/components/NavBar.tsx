@@ -20,6 +20,7 @@ function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navbarRef = useRef(null);
   const { setSearchResults } = useContext(SearchContext);
   const apiURL = import.meta.env.VITE_API_URL;
@@ -82,10 +83,22 @@ function NavBar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Navbar
       expand="lg"
-      bg="dark"
+      bg="black"
       variant="dark"
       sticky="top"
       expanded={expanded}
@@ -106,7 +119,7 @@ function NavBar() {
             <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
             GymDiary
           </Navbar.Brand>
-          <div style={{ width: "30%" }}>
+          <div style={{ width: "30%", display: 'flex', justifyContent: 'flex-end' }}>
             {user && location.pathname === "/" && (
               <NavbarText className="navbar-back-button">
                 <FaSearch
@@ -123,33 +136,35 @@ function NavBar() {
             />
           </div>
         </div>
-        <div className="search-bar">
-          {showSearchBar || window.innerWidth > 768
-            ? location.pathname !== "/" ||
-              (user && (
-                <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
-                  <FormControl
-                    type="search"
-                    placeholder="search workouts"
-                    aria-label="Search"
-                    value={searchTerm}
-                    style={{ borderRadius: "2em" }}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setSearchTerm(e.target.value);
-                      debouncedHandleSearch(e.target.value);
-                    }}
-                  />
-                </Form>
-              ))
-            : null}
+        <div
+          className={`search-bar ${
+            showSearchBar || windowWidth > 768 ? "open" : ""
+          }`}
+        >
+          {location.pathname !== "/" || user ? (
+            <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+              <FormControl
+              size="sm"
+                type="search"
+                placeholder="search workouts"
+                aria-label="Search"
+                value={searchTerm}
+                style={{ borderRadius: "2em" }}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setSearchTerm(e.target.value);
+                  debouncedHandleSearch(e.target.value);
+                }}
+              />
+            </Form>
+          ) : null}
         </div>
-        <div style={{width: "144em"}}> </div>
+        <div style={{ width: "144em" }}> </div>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user && (
               <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
                 {window.innerWidth <= 768 && (
-                <FaHome size="1.2em" style={{ marginRight: "10px" }} />
+                  <FaHome size="1.2em" style={{ marginRight: "10px" }} />
                 )}
                 Your Workouts
               </Nav.Link>
@@ -162,7 +177,7 @@ function NavBar() {
                   onClick={() => setExpanded(false)}
                 >
                   {window.innerWidth <= 768 && (
-                  <FiLogIn size="1.2em" style={{ marginRight: "10px" }} />
+                    <FiLogIn size="1.2em" style={{ marginRight: "10px" }} />
                   )}
                   Login
                 </Nav.Link>
@@ -172,11 +187,10 @@ function NavBar() {
                   onClick={() => setExpanded(false)}
                 >
                   {window.innerWidth <= 768 && (
-                  <FaUserPlus size="1.2em" style={{ marginRight: "10px" }} />
+                    <FaUserPlus size="1.2em" style={{ marginRight: "10px" }} />
                   )}
                   New Account
                 </Nav.Link>
-
               </>
             ) : (
               <>
@@ -188,17 +202,17 @@ function NavBar() {
                   <FaUserGroup size="1.2em" style={{ marginRight: "10px" }} />
                   Groups
                 </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  handleLogout();
-                  setExpanded(false);
-                }}
-                as={Link}
-                to="/login"
-              >
-                <FiLogOut size="1.2em" style={{ marginRight: "10px" }} />
-                Logout
-              </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    handleLogout();
+                    setExpanded(false);
+                  }}
+                  as={Link}
+                  to="/login"
+                >
+                  <FiLogOut size="1.2em" style={{ marginRight: "10px" }} />
+                  Logout
+                </Nav.Link>
               </>
             )}
           </Nav>
