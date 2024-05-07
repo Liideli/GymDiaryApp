@@ -9,7 +9,7 @@ import {
 } from "../graphql/queries";
 import { doGraphQLFetch } from "../graphql/fetch";
 import type { Group } from "../types/Group";
-import { FaMedal } from "react-icons/fa";
+import { FaMedal, FaUser } from "react-icons/fa";
 import { User } from "../types/User";
 import { toast } from "react-toastify";
 import ConfirmationModal from "./ConfirmationModal";
@@ -205,10 +205,17 @@ const GroupDetail = () => {
               >
                 <Card.Body>
                   <Card.Title>
-                    {index === 0 && <FaMedal />}
+                    {index === 0 ? (
+                      <FaMedal size="1.2em" style={{ marginRight: "10px" }} />
+                    ) : (
+                      <FaUser size="0.9em" style={{ marginRight: "10px" }} />
+                    )}
                     {member.user_name}
                   </Card.Title>
-                  <Card.Text>{member.workoutCount} workouts</Card.Text>
+                  <Card.Text>
+                    {member.workoutCount}{" "}
+                    {member.workoutCount === 1 ? "workout" : "workouts"}
+                  </Card.Text>{" "}
                 </Card.Body>
               </Card>
             ))
