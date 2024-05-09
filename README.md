@@ -28,16 +28,20 @@ The initial idea of GymDiary was to make an application that is designed to be s
 ## Test Application Here
 [https://users.metropolia.fi/~roopekl/gymdiary/](https://users.metropolia.fi/~roopekl/gymdiary/)
 
-# Steps for testing
+## Steps for testing all functionalities
   - Create new account
   - Login to your account
-  - Create new workout
+  - Create new workout/workouts
+  - Search for workout/workouts
   - Modify workout
-  - Create new exercise
+  - Create new exercise by tapping workout
   - Modify exercise
   - Delete exercise
   - Delete workout
-  
+  - Join a group
+  - See others workouts/exercises
+  - Create your own group
+  - Delete group
 
 ## Installation
 
