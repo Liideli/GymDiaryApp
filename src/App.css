@@ -107,6 +107,10 @@ button.button-blue:hover {
   transition: border-radius 0.1s ease-out
 }
 
+.list-group-item {
+  background-color: #0000 !important
+}
+
 .custom-card:hover {
   border-top-right-radius: 1em;
   border-bottom-left-radius: 1em;

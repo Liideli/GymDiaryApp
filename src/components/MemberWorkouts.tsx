@@ -156,7 +156,7 @@ const MemberWorkouts = () => {
                     {selectedUserName !==
                     JSON.parse(localStorage.getItem("user")!).user_name ? (
                       <Card.Text>
-                        <FaUser />
+                        <FaUser style={{marginRight: "0.2em"}}/>
                         {selectedUserName}
                       </Card.Text>
                     ) : (

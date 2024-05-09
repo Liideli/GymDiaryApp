@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Container, FloatingLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
 import { doGraphQLFetch } from '../graphql/fetch';
 import { register } from '../graphql/queries';
 import { RegisterMessageResponse } from '../types/RegisterMessageResponse';
@@ -13,8 +12,6 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const apiURL = import.meta.env.VITE_API_URL;
 
-
-  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +30,6 @@ const Register = () => {
       }
 
       console.log(registerData);
-      setUser(registerData.register.user);
       navigate('/login');
     } catch (error) {
       console.error(error);

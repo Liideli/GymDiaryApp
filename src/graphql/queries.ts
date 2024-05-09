@@ -33,6 +33,18 @@ query getUsers {
   }
 }`;
 
+const deleteUser = `mutation DeleteUser($deleteUserId: ID!) {
+  deleteUser(id: $deleteUserId) {
+    user {
+      id
+      user_name
+      email
+      workoutCount
+    }
+    message
+  }
+}`;
+
 const createWorkout = `
 mutation CreateWorkout($input: WorkoutInput!) {
   createWorkout(input: $input) {
@@ -285,6 +297,7 @@ export {
   login,
   register,
   getUsers,
+  deleteUser,
   createWorkout,
   getWorkoutsByUser,
   getWorkoutsByOwner,

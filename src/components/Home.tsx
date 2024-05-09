@@ -132,7 +132,7 @@ const Home = () => {
                     >
                       <FaPen />
                     </Button>
-                    <ListGroup.Item>
+                    <ListGroup.Item style={{backgroundColor: "#0000"}}>
                       <h4>{workout.title}</h4>
                     </ListGroup.Item>
                     <div style={{width: "2em"}}>{" "}</div>

@@ -119,7 +119,13 @@ function NavBar() {
             <LiaDumbbellSolid className="dumbbell-icon" size="2em" />
             GymDiary
           </Navbar.Brand>
-          <div style={{ width: "30%", display: 'flex', justifyContent: 'flex-end' }}>
+          <div
+            style={{
+              width: "30%",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             {user && location.pathname === "/" && (
               <NavbarText className="navbar-back-button">
                 <FaSearch
@@ -144,7 +150,7 @@ function NavBar() {
           {location.pathname === "/" && user ? (
             <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
               <FormControl
-              size="sm"
+                size="sm"
                 type="search"
                 placeholder="search workouts"
                 aria-label="Search"
@@ -213,15 +219,22 @@ function NavBar() {
                   <FiLogOut size="1.2em" style={{ marginRight: "10px" }} />
                   Logout
                 </Nav.Link>
+                {user && (
+                  <Nav.Link
+                  onClick={() => {
+                    setExpanded(false);
+                  }}
+                    className="ml-auto"
+                    as={Link}
+                    to="/userprofile"
+                  >
+                    <FaUser size="1.2em" style={{ marginRight: "10px" }} />
+                    {user.user_name}
+                  </Nav.Link>
+                )}
               </>
             )}
           </Nav>
-          {user && (
-            <Navbar.Text className="ml-auto">
-              <FaUser size="1.2em" style={{ marginRight: "10px" }} />
-              {user.user_name}
-            </Navbar.Text>
-          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -12,10 +12,10 @@ import { User } from './types/User';
 import { WorkoutContext } from './WorkoutContext';
 import { SearchContext } from './SearchContext';
 import { Workout } from './types/Workout';
-import People from './components/People';
 import Groups from './components/Groups';
 import GroupDetail from './components/GroupDetail';
 import MemberWorkouts from './components/MemberWorkouts';
+import UserProfile from './components/UserProfile';
 
 
 function App() {
@@ -50,8 +50,8 @@ function App() {
           <Route path="/exercise/:id" element={<Exercise />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/group/:id" element={<GroupDetail />} />
-          <Route path="/leaderboard" element={<People />} />
           <Route path="/memberworkouts/:user_name" element={<MemberWorkouts />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </Router>
       </WorkoutContext.Provider>
