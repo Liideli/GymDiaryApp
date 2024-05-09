@@ -42,6 +42,8 @@ The initial idea of GymDiary was to make an application that is designed to be s
   - See others workouts/exercises
   - Create your own group
   - Delete group
+  - Navigate to user profile by clicking user name
+  - Delete user (if you want to)
 
 ## Installation
 
