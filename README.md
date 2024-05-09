@@ -28,6 +28,17 @@ The initial idea of GymDiary was to make an application that is designed to be s
 ## Test Application Here
 [https://users.metropolia.fi/~roopekl/gymdiary/](https://users.metropolia.fi/~roopekl/gymdiary/)
 
+# Steps for testing
+  - Create new account
+  - Login to your account
+  - Create new workout
+  - Modify workout
+  - Create new exercise
+  - Modify exercise
+  - Delete exercise
+  - Delete workout
+  
+
 ## Installation
 
 To get started with GymDiary client, follow these steps:
