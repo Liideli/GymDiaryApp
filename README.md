@@ -13,6 +13,7 @@ The initial idea of GymDiary was to make an application that is designed to be s
 - **Exercise Logging**: Log your exercises with details such as name, description, sets, reps, weight, duration.
 - **Training Groups**: Create groups to share workouts and exercises with other users.
 - **Responsive Design**: Access GymDiary from any device, including smartphones, tablets, and desktop computers.
+- **PWA Support**: Install GymDiary as a progressive web app for quick access.
 
 ## Screenshots
 

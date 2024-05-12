@@ -44,7 +44,7 @@ export default defineConfig({
         background_color: "#f0e7db",
         display: "standalone",
         scope: "/",
-        start_url: "/",
+        start_url: "/~roopekl/gymdiary/",
         orientation: "portrait",
       },
     }),
